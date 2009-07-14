@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GraphEditorR Plug-in
+Bundle-SymbolicName: GraphEditorR;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.eclipse.ui,
+ de.walware.statet.nico.core;bundle-version="0.7.0",
+ de.walware.statet.nico.ui;bundle-version="0.7.0",
+ de.walware.rj.data;bundle-version="0.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/GraphEditor/src"
+    modelPluginID="GraphEditor" modelName="GraphEditor" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>GraphEditor.ecore</foreignModel>
+  <genPackages prefix="GraphEditor" disposableProviderFactory="true" ecorePackage="GraphEditor.ecore#/">
+    <genClasses ecoreClass="GraphEditor.ecore#//Graph">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Graph/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Graph/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Graph/connections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Graph/messages"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="GraphEditor.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Node/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Node/name"/>
+    </genClasses>
+    <genClasses ecoreClass="GraphEditor.ecore#//Factornode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Factornode/factor"/>
+    </genClasses>
+    <genClasses ecoreClass="GraphEditor.ecore#//Variablenode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Variablenode/value"/>
+    </genClasses>
+    <genClasses ecoreClass="GraphEditor.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Message/msg"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Message/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Message/target"/>
+    </genClasses>
+    <genClasses ecoreClass="GraphEditor.ecore#//Edge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Edge/child"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Edge/parent"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

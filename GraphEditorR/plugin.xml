@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="R Action Set"
+            visible="true"
+            id="GraphEditorR.actionSet">
+         <menu
+               label="&amp;R Menu"
+               id="rMenu">
+            <separator
+                  name="factorgraphGroup">
+            </separator>
+         </menu>
+         <action
+               label="start &amp;R "
+               icon="icons/sample.gif"
+               class="graphEditor.r.actions.RengineAction"
+               tooltip="start R"
+               menubarPath="rMenu/factorgraphGroup"
+               toolbarPath="factorgraphGroup"
+               id="graphEditor.r.actions.RengineAction">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
