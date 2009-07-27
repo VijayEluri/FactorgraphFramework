@@ -1,0 +1,7 @@
+# Tracing options for the GraphEditor.diagram plug-in
+
+# Common issues
+GraphEditor.diagram/debug=false
+
+# Visual IDs
+GraphEditor.diagram/debug/visualID=false

@@ -77,11 +77,12 @@
     <domainMetaElement
         href="GraphEditor.ecore#//Message"/>
     <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
+        xsi:type="gmfmap:FeatureLabelMapping"
+        editorPattern="">
       <diagramLabel
-          href="GraphEditor.gmfgraph#MessageMsg"/>
+          href="GraphEditor.gmfgraph#MessageCount"/>
       <features
-          href="GraphEditor.ecore#//Message/msg"/>
+          href="GraphEditor.ecore#//Message/count"/>
     </labelMappings>
     <containmentFeature
         href="GraphEditor.ecore#//Graph/messages"/>
@@ -144,23 +145,6 @@
             nullAsError="true">
           <attribute
               href="GraphEditor.ecore#//Node/id"/>
-        </target>
-      </audits>
-    </childContainers>
-    <childContainers
-        id="messageRulesId"
-        name="MessageRules">
-      <audits
-          name="messageMsgRule"
-          id="messageMsgRuleId"
-          message="Message has no Msg">
-        <rule
-            body="self.size() &lt;>0 and self&lt;>' '"/>
-        <target
-            xsi:type="gmfmap:DomainAttributeTarget"
-            nullAsError="true">
-          <attribute
-              href="GraphEditor.ecore#//Message/msg"/>
         </target>
       </audits>
     </childContainers>

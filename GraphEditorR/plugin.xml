@@ -5,24 +5,24 @@
    <extension
          point="org.eclipse.ui.actionSets">
       <actionSet
+            id="GraphEditorR.actionSet"
             label="R Action Set"
-            visible="true"
-            id="GraphEditorR.actionSet">
+            visible="true">
          <menu
-               label="&amp;R Menu"
-               id="rMenu">
+               id="rMenu"
+               label="&amp;R Menu">
             <separator
                   name="factorgraphGroup">
             </separator>
          </menu>
          <action
-               label="start &amp;R "
-               icon="icons/sample.gif"
                class="graphEditor.r.actions.RengineAction"
-               tooltip="start R"
+               icon="icons/sample.gif"
+               id="graphEditor.r.actions.RengineAction"
+               label="start &amp;R "
                menubarPath="rMenu/factorgraphGroup"
                toolbarPath="factorgraphGroup"
-               id="graphEditor.r.actions.RengineAction">
+               tooltip="start R">
          </action>
       </actionSet>
    </extension>

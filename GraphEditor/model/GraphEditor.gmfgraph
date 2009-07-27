@@ -61,7 +61,7 @@
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="MessageMsgFigure"
+            name="MessageCountFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
@@ -91,7 +91,7 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
-      name="MessageMsg"
+      name="MessageCount"
       figure="MessageFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.3/@accessors.0"/>

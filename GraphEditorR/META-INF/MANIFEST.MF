@@ -6,5 +6,13 @@ Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.ui,
  de.walware.statet.nico.core;bundle-version="0.7.0",
  de.walware.statet.nico.ui;bundle-version="0.7.0",
- de.walware.rj.data;bundle-version="0.2.0"
+ de.walware.statet.r.core;bundle-version="0.8.0",
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: graphEditor,
+ graphEditor.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.xmi.impl
