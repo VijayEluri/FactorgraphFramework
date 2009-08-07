@@ -61,7 +61,7 @@ public class EdgeReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof graphEditor.Node && newEnd instanceof graphEditor.Node)) {
 			return false;
 		}
-		graphEditor.Node target = getLink().getChild();
+		graphEditor.Node target = getLink().getTo();
 		if (!(getLink().eContainer() instanceof graphEditor.Graph)) {
 			return false;
 		}
@@ -78,7 +78,7 @@ public class EdgeReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof graphEditor.Node && newEnd instanceof graphEditor.Node)) {
 			return false;
 		}
-		graphEditor.Node source = getLink().getParent();
+		graphEditor.Node source = getLink().getFrom();
 		if (!(getLink().eContainer() instanceof graphEditor.Graph)) {
 			return false;
 		}
@@ -110,7 +110,7 @@ public class EdgeReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	protected CommandResult reorientSource() throws ExecutionException {
-		getLink().setParent(getNewSource());
+		getLink().setFrom(getNewSource());
 		return CommandResult.newOKCommandResult(getLink());
 	}
 
@@ -118,7 +118,7 @@ public class EdgeReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	protected CommandResult reorientTarget() throws ExecutionException {
-		getLink().setChild(getNewTarget());
+		getLink().setTo(getNewTarget());
 		return CommandResult.newOKCommandResult(getLink());
 	}
 

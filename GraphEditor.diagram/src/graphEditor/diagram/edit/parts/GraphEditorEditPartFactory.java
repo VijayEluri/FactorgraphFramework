@@ -31,20 +31,20 @@ public class GraphEditorEditPartFactory implements EditPartFactory {
 			case graphEditor.diagram.edit.parts.GraphEditPart.VISUAL_ID:
 				return new graphEditor.diagram.edit.parts.GraphEditPart(view);
 
+			case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
+				return new graphEditor.diagram.edit.parts.VariablenodeEditPart(
+						view);
+
+			case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
+				return new graphEditor.diagram.edit.parts.FactornodeNameEditPart(
+						view);
+
 			case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
 				return new graphEditor.diagram.edit.parts.FactornodeEditPart(
 						view);
 
 			case graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID:
 				return new graphEditor.diagram.edit.parts.VariablenodeNameEditPart(
-						view);
-
-			case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
-				return new graphEditor.diagram.edit.parts.VariablenodeEditPart(
-						view);
-
-			case graphEditor.diagram.edit.parts.WrappingLabel2EditPart.VISUAL_ID:
-				return new graphEditor.diagram.edit.parts.WrappingLabel2EditPart(
 						view);
 
 			case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:

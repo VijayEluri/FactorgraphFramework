@@ -42,13 +42,13 @@ public class GraphEditorDiagramUpdater {
 			graphEditor.Node childElement = (graphEditor.Node) it.next();
 			int visualID = graphEditor.diagram.part.GraphEditorVisualIDRegistry
 					.getNodeVisualID(view, childElement);
-			if (visualID == graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID) {
+			if (visualID == graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID) {
 				result
 						.add(new graphEditor.diagram.part.GraphEditorNodeDescriptor(
 								childElement, visualID));
 				continue;
 			}
-			if (visualID == graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID) {
+			if (visualID == graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID) {
 				result
 						.add(new graphEditor.diagram.part.GraphEditorNodeDescriptor(
 								childElement, visualID));
@@ -66,10 +66,10 @@ public class GraphEditorDiagramUpdater {
 				.getVisualID(view)) {
 		case graphEditor.diagram.edit.parts.GraphEditPart.VISUAL_ID:
 			return getGraph_1000ContainedLinks(view);
-		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
-			return getVariablenode_2001ContainedLinks(view);
 		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 			return getFactornode_2002ContainedLinks(view);
+		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
+			return getVariablenode_2001ContainedLinks(view);
 		case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:
 			return getEdge_4001ContainedLinks(view);
 		case graphEditor.diagram.edit.parts.MessageEditPart.VISUAL_ID:
@@ -84,10 +84,10 @@ public class GraphEditorDiagramUpdater {
 	public static List getIncomingLinks(View view) {
 		switch (graphEditor.diagram.part.GraphEditorVisualIDRegistry
 				.getVisualID(view)) {
-		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
-			return getVariablenode_2001IncomingLinks(view);
 		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 			return getFactornode_2002IncomingLinks(view);
+		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
+			return getVariablenode_2001IncomingLinks(view);
 		case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:
 			return getEdge_4001IncomingLinks(view);
 		case graphEditor.diagram.edit.parts.MessageEditPart.VISUAL_ID:
@@ -102,10 +102,10 @@ public class GraphEditorDiagramUpdater {
 	public static List getOutgoingLinks(View view) {
 		switch (graphEditor.diagram.part.GraphEditorVisualIDRegistry
 				.getVisualID(view)) {
-		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
-			return getVariablenode_2001OutgoingLinks(view);
 		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 			return getFactornode_2002OutgoingLinks(view);
+		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
+			return getVariablenode_2001OutgoingLinks(view);
 		case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:
 			return getEdge_4001OutgoingLinks(view);
 		case graphEditor.diagram.edit.parts.MessageEditPart.VISUAL_ID:
@@ -246,8 +246,7 @@ public class GraphEditorDiagramUpdater {
 	private static Collection getContainedTypeModelFacetLinks_Edge_4001(
 			graphEditor.Graph container) {
 		Collection result = new LinkedList();
-		for (Iterator links = container.getConnections().iterator(); links
-				.hasNext();) {
+		for (Iterator links = container.getEdges().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof graphEditor.Edge) {
 				continue;
@@ -257,8 +256,8 @@ public class GraphEditorDiagramUpdater {
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			graphEditor.Node dst = link.getChild();
-			graphEditor.Node src = link.getParent();
+			graphEditor.Node dst = link.getTo();
+			graphEditor.Node src = link.getFrom();
 			result
 					.add(new graphEditor.diagram.part.GraphEditorLinkDescriptor(
 							src,
@@ -287,8 +286,8 @@ public class GraphEditorDiagramUpdater {
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			graphEditor.Node dst = link.getTarget();
-			graphEditor.Node src = link.getSource();
+			graphEditor.Node dst = link.getTo();
+			graphEditor.Node src = link.getFrom();
 			result
 					.add(new graphEditor.diagram.part.GraphEditorLinkDescriptor(
 							src,
@@ -311,7 +310,7 @@ public class GraphEditorDiagramUpdater {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
 			if (setting.getEStructuralFeature() != graphEditor.GraphEditorPackage.eINSTANCE
-					.getEdge_Child()
+					.getEdge_To()
 					|| false == setting.getEObject() instanceof graphEditor.Edge) {
 				continue;
 			}
@@ -320,7 +319,7 @@ public class GraphEditorDiagramUpdater {
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			graphEditor.Node src = link.getParent();
+			graphEditor.Node src = link.getFrom();
 			result
 					.add(new graphEditor.diagram.part.GraphEditorLinkDescriptor(
 							src,
@@ -343,7 +342,7 @@ public class GraphEditorDiagramUpdater {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
 			if (setting.getEStructuralFeature() != graphEditor.GraphEditorPackage.eINSTANCE
-					.getMessage_Target()
+					.getMessage_To()
 					|| false == setting.getEObject() instanceof graphEditor.Message) {
 				continue;
 			}
@@ -353,7 +352,7 @@ public class GraphEditorDiagramUpdater {
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			graphEditor.Node src = link.getSource();
+			graphEditor.Node src = link.getFrom();
 			result
 					.add(new graphEditor.diagram.part.GraphEditorLinkDescriptor(
 							src,
@@ -384,8 +383,7 @@ public class GraphEditorDiagramUpdater {
 			return Collections.EMPTY_LIST;
 		}
 		Collection result = new LinkedList();
-		for (Iterator links = container.getConnections().iterator(); links
-				.hasNext();) {
+		for (Iterator links = container.getEdges().iterator(); links.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof graphEditor.Edge) {
 				continue;
@@ -395,8 +393,8 @@ public class GraphEditorDiagramUpdater {
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			graphEditor.Node dst = link.getChild();
-			graphEditor.Node src = link.getParent();
+			graphEditor.Node dst = link.getTo();
+			graphEditor.Node src = link.getFrom();
 			if (src != source) {
 				continue;
 			}
@@ -441,8 +439,8 @@ public class GraphEditorDiagramUpdater {
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			graphEditor.Node dst = link.getTarget();
-			graphEditor.Node src = link.getSource();
+			graphEditor.Node dst = link.getTo();
+			graphEditor.Node src = link.getFrom();
 			if (src != source) {
 				continue;
 			}

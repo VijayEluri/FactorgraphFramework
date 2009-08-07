@@ -88,4 +88,126 @@ public class GraphEditorValidationProvider extends
 		return true;
 	}
 
+	/**
+	 * @generated
+	 */
+	public static class DefaultCtx implements IClientSelector {
+
+		/**
+		 * @generated
+		 */
+		public boolean selects(Object object) {
+			return isInDefaultEditorContext(object);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	public static class Adapter1 extends AbstractModelConstraint {
+
+		/**
+		 * @generated
+		 */
+		private graphEditor.diagram.expressions.GraphEditorAbstractExpression expression;
+
+		/**
+		 * @generated
+		 */
+		public IStatus validate(IValidationContext ctx) {
+			final Object context = ctx.getTarget().eGet(
+					graphEditor.GraphEditorPackage.eINSTANCE.getNode_Name());
+			if (context == null) {
+				return ctx.createFailureStatus(new Object[] { formatElement(ctx
+						.getTarget()) });
+			}
+			if (expression == null) {
+				expression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+						.getExpression("self.size()<>0 and self<>\' \'",
+								EcorePackage.eINSTANCE.getEString());
+			}
+			Object result = expression.evaluate(context);
+			if (result instanceof Boolean && ((Boolean) result).booleanValue()) {
+				return Status.OK_STATUS;
+			}
+			return ctx.createFailureStatus(new Object[] { formatElement(ctx
+					.getTarget()) });
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	public static class Adapter2 extends AbstractModelConstraint {
+
+		/**
+		 * @generated
+		 */
+		private graphEditor.diagram.expressions.GraphEditorAbstractExpression expression;
+
+		/**
+		 * @generated
+		 */
+		public IStatus validate(IValidationContext ctx) {
+			final Object context = ctx.getTarget().eGet(
+					graphEditor.GraphEditorPackage.eINSTANCE.getNode_Id());
+			if (context == null) {
+				return ctx.createFailureStatus(new Object[] { formatElement(ctx
+						.getTarget()) });
+			}
+			if (expression == null) {
+				expression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+						.getExpression("self<>0", EcorePackage.eINSTANCE
+								.getELong());
+			}
+			Object result = expression.evaluate(context);
+			if (result instanceof Boolean && ((Boolean) result).booleanValue()) {
+				return Status.OK_STATUS;
+			}
+			return ctx.createFailureStatus(new Object[] { formatElement(ctx
+					.getTarget()) });
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	public static class Adapter3 extends AbstractModelConstraint {
+
+		/**
+		 * @generated
+		 */
+		private graphEditor.diagram.expressions.GraphEditorAbstractExpression expression;
+
+		/**
+		 * @generated
+		 */
+		public IStatus validate(IValidationContext ctx) {
+			final Object context = ctx.getTarget().eGet(
+					graphEditor.GraphEditorPackage.eINSTANCE.getGraph_Name());
+			if (context == null) {
+				return ctx.createFailureStatus(new Object[] { formatElement(ctx
+						.getTarget()) });
+			}
+			if (expression == null) {
+				expression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+						.getExpression("self.size()<>0 and self<>\' \' ",
+								EcorePackage.eINSTANCE.getEString());
+			}
+			Object result = expression.evaluate(context);
+			if (result instanceof Boolean && ((Boolean) result).booleanValue()) {
+				return Status.OK_STATUS;
+			}
+			return ctx.createFailureStatus(new Object[] { formatElement(ctx
+					.getTarget()) });
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	static String formatElement(EObject object) {
+		return EMFCoreUtil.getQualifiedName(object, true);
+	}
+
 }

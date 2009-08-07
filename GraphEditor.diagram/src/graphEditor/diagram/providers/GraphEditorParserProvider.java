@@ -101,10 +101,10 @@ public class GraphEditorParserProvider extends AbstractProvider implements
 	 */
 	protected IParser getParser(int visualID) {
 		switch (visualID) {
+		case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
+			return getFactornodeName_5002Parser();
 		case graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID:
 			return getVariablenodeName_5001Parser();
-		case graphEditor.diagram.edit.parts.WrappingLabel2EditPart.VISUAL_ID:
-			return getFactornodeName_5002Parser();
 		case graphEditor.diagram.edit.parts.WrappingLabel3EditPart.VISUAL_ID:
 			return getMessageCount_6001Parser();
 		}

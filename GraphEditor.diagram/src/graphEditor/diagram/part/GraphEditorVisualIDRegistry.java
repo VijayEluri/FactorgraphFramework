@@ -118,13 +118,13 @@ public class GraphEditorVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case graphEditor.diagram.edit.parts.GraphEditPart.VISUAL_ID:
-			if (graphEditor.GraphEditorPackage.eINSTANCE.getVariablenode()
-					.isSuperTypeOf(domainElement.eClass())) {
-				return graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID;
-			}
 			if (graphEditor.GraphEditorPackage.eINSTANCE.getFactornode()
 					.isSuperTypeOf(domainElement.eClass())) {
 				return graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID;
+			}
+			if (graphEditor.GraphEditorPackage.eINSTANCE.getVariablenode()
+					.isSuperTypeOf(domainElement.eClass())) {
+				return graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID;
 			}
 			break;
 		}
@@ -154,21 +154,21 @@ public class GraphEditorVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
+			if (graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
 		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
 			if (graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
-			if (graphEditor.diagram.edit.parts.WrappingLabel2EditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
 		case graphEditor.diagram.edit.parts.GraphEditPart.VISUAL_ID:
-			if (graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID == nodeVisualID) {
+			if (graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
-			if (graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID == nodeVisualID) {
+			if (graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;

@@ -177,11 +177,11 @@ public class GraphEditorElementTypes extends ElementInitializers {
 			elements.put(Graph_1000, graphEditor.GraphEditorPackage.eINSTANCE
 					.getGraph());
 
-			elements.put(Variablenode_2001,
-					graphEditor.GraphEditorPackage.eINSTANCE.getVariablenode());
-
 			elements.put(Factornode_2002,
 					graphEditor.GraphEditorPackage.eINSTANCE.getFactornode());
+
+			elements.put(Variablenode_2001,
+					graphEditor.GraphEditorPackage.eINSTANCE.getVariablenode());
 
 			elements.put(Edge_4001, graphEditor.GraphEditorPackage.eINSTANCE
 					.getEdge());
@@ -206,8 +206,8 @@ public class GraphEditorElementTypes extends ElementInitializers {
 		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet();
 			KNOWN_ELEMENT_TYPES.add(Graph_1000);
-			KNOWN_ELEMENT_TYPES.add(Variablenode_2001);
 			KNOWN_ELEMENT_TYPES.add(Factornode_2002);
+			KNOWN_ELEMENT_TYPES.add(Variablenode_2001);
 			KNOWN_ELEMENT_TYPES.add(Edge_4001);
 			KNOWN_ELEMENT_TYPES.add(Message_4002);
 		}

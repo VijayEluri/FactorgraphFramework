@@ -1,9 +1,55 @@
 package de.lmu.genzentrum.tresch;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 public class Main {
+	
+	public static double[][] stringToArray(String initialValue){
+		double[][] value = null;
+		
+		String[] init=initialValue.split("!");
+		if (init.length==2){
+			String start=init[0];
+			String[] startStrings=start.split("x");
+			value=new double[Integer.parseInt(startStrings[0])][Integer.parseInt(startStrings[1])];		
+			
+			String array=init[1];
+			if (array.startsWith("{") && array.endsWith("}")) {
+				String substring = array.substring(1,
+						array.length() - 1);
+				String[] lines=substring.split(";");
 
+				for (int i = 0; i <lines.length; i++) {
+					String line = lines[i];
+					if (line.startsWith("[") && line.endsWith("]")) {
+						String linesubstring = line.substring(1, line.length() - 1);
+						String[] lineValues = linesubstring.split(",");
+						double[] lineDoubles=new double[lineValues.length];
+						for(int l=0;l<lineValues.length;l++)
+							lineDoubles[l]=(Double.valueOf(lineValues[l]).doubleValue());
+						value[i]=lineDoubles;
+						}
+					}
+				}
+			}
+		return value;
+	}
+	public static String arrayToString(double[][] value){
+		StringBuffer sb = new StringBuffer();
+		sb.append(value.length+"x"+value[0].length+"!");
+		sb.append("{");
+		for (int i = 0; i < value.length; i++) {
+			sb.append(Arrays.toString(value[i]));
+			if (i != value.length - 1)
+				sb.append(";");
+		}
+		sb.append("}");
+		return sb.toString();
+	}
 	public static void main(String[] args) throws NoValueException {
 		Object[] defWerte = new Object[2];
 		defWerte[0] = 0;
@@ -165,6 +211,36 @@ public class Main {
 		SumProduct sum = new SumProduct();
 		sum.doSum(test);
 		test.print();
+
+		Object[][] values = funcFC;
+
+	//	System.out.println("initialValue: "+sb.toString());
+		
+		String initialValue = "3x3!{[0,1,2];[0,1,2];[0,1,2]}";
+		System.out.println(initialValue);
+		double[][] result= stringToArray(initialValue);
+		String r=arrayToString(result);
+		System.out.println(r);
+		
+		
+		for(int y=0;y<result.length;y++)
+		System.out.println("loadedValue: "+Arrays.toString(result[y]));
+		
+
+		
+
+		/*
+		 * value = new double[x][y]; double[] linearray = new double[y]; for
+		 * (int l = 0; l <yString.length;l++) { double d =
+		 * Double.valueOf(yString[i]).doubleValue(); value[l][i] = d; } }
+		 */
+		/*
+		 * //System.out.println(funcFC.length); System.out.print("{"); for (int
+		 * i = 0; i < funcFC.length; i++){
+		 * System.out.print(Arrays.toString(funcFC[i])); for (int j = 0; j <
+		 * funcFC[i].length; j++) { //System.out.println(funcFC[i][j]); } }
+		 * System.out.print("}");
+		 */
 
 	}
 

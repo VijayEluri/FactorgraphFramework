@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="graphEditor.presentation.GraphEditorModelWizardID"
+            name="%_UI_GraphEditorModelWizard_label"
+            class="graphEditor.presentation.GraphEditorModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/GraphEditorModelFile.gif">
+         <description>%_UI_GraphEditorModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="graphEditor.presentation.GraphEditorEditorID"
+            name="%_UI_GraphEditorEditor_label"
+            icon="icons/full/obj16/GraphEditorModelFile.gif"
+            extensions="grapheditor"
+            class="graphEditor.presentation.GraphEditorEditor"
+            contributorClass="graphEditor.presentation.GraphEditorActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

@@ -2,17 +2,23 @@ package graphEditor.diagram.edit.parts;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.FlowLayoutEditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
@@ -101,8 +107,8 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof graphEditor.diagram.edit.parts.WrappingLabel2EditPart) {
-			((graphEditor.diagram.edit.parts.WrappingLabel2EditPart) childEditPart)
+		if (childEditPart instanceof graphEditor.diagram.edit.parts.FactornodeNameEditPart) {
+			((graphEditor.diagram.edit.parts.FactornodeNameEditPart) childEditPart)
 					.setLabel(getPrimaryShape().getFigureFactornodeNameFigure());
 			return true;
 		}
@@ -201,7 +207,7 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(graphEditor.diagram.part.GraphEditorVisualIDRegistry
-				.getType(graphEditor.diagram.edit.parts.WrappingLabel2EditPart.VISUAL_ID));
+				.getType(graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID));
 	}
 
 	/**

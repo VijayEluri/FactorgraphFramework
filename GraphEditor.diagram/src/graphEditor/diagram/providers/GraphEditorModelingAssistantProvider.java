@@ -36,9 +36,9 @@ public class GraphEditorModelingAssistantProvider extends
 		if (editPart instanceof graphEditor.diagram.edit.parts.GraphEditPart) {
 			List types = new ArrayList();
 			types
-					.add(graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2001);
-			types
 					.add(graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2002);
+			types
+					.add(graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2001);
 			return types;
 		}
 		return Collections.EMPTY_LIST;

@@ -62,7 +62,7 @@ public class VariablenodeViewFactory extends AbstractShapeViewFactory {
 						eObjectAdapter,
 						view,
 						graphEditor.diagram.part.GraphEditorVisualIDRegistry
-								.getType(graphEditor.diagram.edit.parts.WrappingLabel2EditPart.VISUAL_ID),
+								.getType(graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID),
 						ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

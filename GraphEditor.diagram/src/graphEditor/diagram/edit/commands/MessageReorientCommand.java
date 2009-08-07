@@ -61,7 +61,7 @@ public class MessageReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof graphEditor.Node && newEnd instanceof graphEditor.Node)) {
 			return false;
 		}
-		graphEditor.Node target = getLink().getTarget();
+		graphEditor.Node target = getLink().getTo();
 		if (!(getLink().eContainer() instanceof graphEditor.Graph)) {
 			return false;
 		}
@@ -78,7 +78,7 @@ public class MessageReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof graphEditor.Node && newEnd instanceof graphEditor.Node)) {
 			return false;
 		}
-		graphEditor.Node source = getLink().getSource();
+		graphEditor.Node source = getLink().getFrom();
 		if (!(getLink().eContainer() instanceof graphEditor.Graph)) {
 			return false;
 		}
@@ -110,7 +110,7 @@ public class MessageReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	protected CommandResult reorientSource() throws ExecutionException {
-		getLink().setSource(getNewSource());
+		getLink().setFrom(getNewSource());
 		return CommandResult.newOKCommandResult(getLink());
 	}
 
@@ -118,7 +118,7 @@ public class MessageReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	protected CommandResult reorientTarget() throws ExecutionException {
-		getLink().setTarget(getNewTarget());
+		getLink().setTo(getNewTarget());
 		return CommandResult.newOKCommandResult(getLink());
 	}
 

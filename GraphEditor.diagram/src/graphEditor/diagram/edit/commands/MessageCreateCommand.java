@@ -87,8 +87,8 @@ public class MessageCreateCommand extends CreateElementCommand {
 		graphEditor.Message newElement = graphEditor.GraphEditorFactory.eINSTANCE
 				.createMessage();
 		getContainer().getMessages().add(newElement);
-		newElement.setSource(getSource());
-		newElement.setTarget(getTarget());
+		newElement.setFrom(getSource());
+		newElement.setTo(getTarget());
 		return newElement;
 	}
 

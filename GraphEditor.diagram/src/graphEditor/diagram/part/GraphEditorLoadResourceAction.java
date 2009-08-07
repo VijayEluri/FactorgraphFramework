@@ -34,8 +34,6 @@ public class GraphEditorLoadResourceAction implements IObjectActionDelegate {
 	 * @generated
 	 */
 	public void run(IAction action) {
-		System.out.println("run");
-		System.out.println(mySelectedElement.getEditingDomain());
 		LoadResourceAction.LoadResourceDialog loadResourceDialog = new LoadResourceAction.LoadResourceDialog(
 				myShell, mySelectedElement.getEditingDomain());
 		loadResourceDialog.open();

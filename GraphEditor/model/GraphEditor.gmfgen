@@ -3,7 +3,69 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel" sameFileForDiagramAndModel="true"
-    diagramFileExtension="grapheditor">
+    diagramFileExtension="grapheditor"
+    domainFileExtension="grapheditor">
+  <audits>
+    <categories
+        id="auditContainerId"
+        name="auditContainer"
+        path="//@audits/@categories.0"/>
+    <categories
+        id="nodeRulesId"
+        name="NodeRules"
+        path="//@audits/@categories.0 //@audits/@categories.1"
+        audits="//@audits/@rules.0 //@audits/@rules.1"/>
+    <categories
+        id="graphRuleId"
+        name="GraphRules"
+        path="//@audits/@categories.0 //@audits/@categories.2"
+        audits="//@audits/@rules.2"/>
+    <rules
+        name="nodeNameRule"
+        description=""
+        id="nodeNameRuleId"
+        rule="//@expressionProviders/@providers.0/@expressions.4"
+        message="Node has no Name"
+        category="//@audits/@categories.1">
+      <target
+          xsi:type="gmfgen:GenDomainAttributeTarget"
+          contextSelector="//@audits/@clientContexts.0"
+          nullAsError="true">
+        <attribute
+            href="GraphEditor.genmodel#//graphEditor/Node/name"/>
+      </target>
+    </rules>
+    <rules
+        name="nodeIdRule"
+        id="nodeIdRuleId"
+        rule="//@expressionProviders/@providers.0/@expressions.5"
+        message="Node has no ID"
+        category="//@audits/@categories.1">
+      <target
+          xsi:type="gmfgen:GenDomainAttributeTarget"
+          contextSelector="//@audits/@clientContexts.0"
+          nullAsError="true">
+        <attribute
+            href="GraphEditor.genmodel#//graphEditor/Node/id"/>
+      </target>
+    </rules>
+    <rules
+        name="graphNameRule"
+        id="graphNameRuleId"
+        rule="//@expressionProviders/@providers.0/@expressions.6"
+        message="Graph has no name"
+        category="//@audits/@categories.2">
+      <target
+          xsi:type="gmfgen:GenDomainAttributeTarget"
+          contextSelector="//@audits/@clientContexts.0"
+          nullAsError="true">
+        <attribute
+            href="GraphEditor.genmodel#//graphEditor/Graph/name"/>
+      </target>
+    </rules>
+    <clientContexts
+        ruleTargets="//@audits/@rules.0/@target //@audits/@rules.1/@target //@audits/@rules.2/@target"/>
+  </audits>
   <diagram
       visualID="1000"
       editPartClassName="GraphEditPart"
@@ -24,6 +86,53 @@
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <domainDiagramElement
         href="GraphEditor.genmodel#//graphEditor/Graph"/>
+    <topLevelNodes
+        visualID="2002"
+        editPartClassName="VariablenodeEditPart"
+        itemSemanticEditPolicyClassName="VariablenodeItemSemanticEditPolicy"
+        notationViewFactoryClassName="VariablenodeViewFactory"
+        canonicalEditPolicyClassName="VariablenodeCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="VariablenodeGraphicalNodeEditPolicy"
+        createCommandClassName="VariablenodeCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="VariablenodeEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          layoutType="FLOW_LAYOUT"
+          className="FactornodeFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class FactornodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureFactornodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public FactornodeFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_CENTER&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_CENTER&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(2);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureFactornodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureFactornodeNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureFactornodeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureFactornodeNameFigure() {&#xA;&#x9;&#x9;return fFigureFactornodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="GraphEditor.genmodel#//graphEditor/Factornode"/>
+        <containmentMetaFeature
+            href="GraphEditor.genmodel#//graphEditor/Graph/nodes"/>
+        <childMetaFeature
+            href="GraphEditor.genmodel#//graphEditor/Graph/nodes"/>
+      </modelFacet>
+      <labels
+          visualID="5002"
+          editPartClassName="FactornodeNameEditPart"
+          itemSemanticEditPolicyClassName="FactornodeNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="FactornodeNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureFactornodeNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="GraphEditor.genmodel#//graphEditor/Node/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
     <topLevelNodes
         visualID="2001"
         editPartClassName="FactornodeEditPart"
@@ -65,54 +174,9 @@
             getterName="getFigureVariablenodeNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
-          <metaFeatures
-              href="GraphEditor.genmodel#//graphEditor/Node/name"/>
-        </modelFacet>
-      </labels>
-    </topLevelNodes>
-    <topLevelNodes
-        visualID="2002"
-        editPartClassName="VariablenodeEditPart"
-        itemSemanticEditPolicyClassName="VariablenodeItemSemanticEditPolicy"
-        notationViewFactoryClassName="VariablenodeViewFactory"
-        canonicalEditPolicyClassName="VariablenodeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="VariablenodeGraphicalNodeEditPolicy"
-        createCommandClassName="VariablenodeCreateCommand">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="VariablenodeEditHelper"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          layoutType="FLOW_LAYOUT"
-          className="FactornodeFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class FactornodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureFactornodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public FactornodeFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_CENTER&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_CENTER&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(false);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setLineWidth(2);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureFactornodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureFactornodeNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureFactornodeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureFactornodeNameFigure() {&#xA;&#x9;&#x9;return fFigureFactornodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-      <modelFacet>
-        <metaClass
-            href="GraphEditor.genmodel#//graphEditor/Factornode"/>
-        <containmentMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Graph/nodes"/>
-        <childMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Graph/nodes"/>
-      </modelFacet>
-      <labels
-          visualID="5002"
-          editPartClassName="WrappingLabel2EditPart"
-          itemSemanticEditPolicyClassName="WrappingLabel2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="WrappingLabel2ViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureFactornodeNameFigure"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            editorPattern=""
+            editPattern="">
           <metaFeatures
               href="GraphEditor.genmodel#//graphEditor/Node/name"/>
         </modelFacet>
@@ -141,14 +205,17 @@
         <metaClass
             href="GraphEditor.genmodel#//graphEditor/Edge"/>
         <containmentMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Graph/connections"/>
+            href="GraphEditor.genmodel#//graphEditor/Graph/edges"/>
         <childMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Graph/connections"/>
+            href="GraphEditor.genmodel#//graphEditor/Graph/edges"/>
         <sourceMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Edge/parent"/>
+            href="GraphEditor.genmodel#//graphEditor/Edge/from"/>
         <targetMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Edge/child"/>
+            href="GraphEditor.genmodel#//graphEditor/Edge/to"/>
       </modelFacet>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.0"
+          targetEnd="//@expressionProviders/@providers.0/@expressions.1"/>
     </links>
     <links
         visualID="4002"
@@ -178,9 +245,9 @@
         <childMetaFeature
             href="GraphEditor.genmodel#//graphEditor/Graph/messages"/>
         <sourceMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Message/source"/>
+            href="GraphEditor.genmodel#//graphEditor/Message/from"/>
         <targetMetaFeature
-            href="GraphEditor.genmodel#//graphEditor/Message/target"/>
+            href="GraphEditor.genmodel#//graphEditor/Message/to"/>
       </modelFacet>
       <labels
           visualID="6001"
@@ -203,6 +270,9 @@
               href="GraphEditor.genmodel#//graphEditor/Message/count"/>
         </modelFacet>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.2"
+          targetEnd="//@expressionProviders/@providers.0/@expressions.3"/>
     </links>
     <palette>
       <groups
@@ -211,12 +281,12 @@
             xsi:type="gmfgen:ToolEntry"
             title="Variablenode"
             description="Create new Variablenode"
-            genNodes="//@diagram/@topLevelNodes.0"/>
+            genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Factornode"
             description="Create new Factornode"
-            genNodes="//@diagram/@topLevelNodes.1"/>
+            genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:Separator"/>
         <entries
@@ -287,4 +357,30 @@
   </propertySheet>
   <domainGenModel
       href="GraphEditor.genmodel#/"/>
+  <expressionProviders>
+    <providers
+        xsi:type="gmfgen:GenExpressionInterpreter">
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self.oclIsTypeOf(Factornode) &lt;> oppositeEnd.oclIsTypeOf(Factornode) &#xD;&#xA;and&#xD;&#xA;self.oclIsTypeOf(Variablenode) &lt;> oppositeEnd.oclIsTypeOf(Variablenode) &#xD;&#xA;"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self &lt;> oppositeEnd"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self.oclIsTypeOf(Factornode) &lt;> oppositeEnd.oclIsTypeOf(Factornode) &#xD;&#xA;and&#xD;&#xA;self.oclIsTypeOf(Variablenode) &lt;> oppositeEnd.oclIsTypeOf(Variablenode) &#xD;&#xA;"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self.size()&lt;>0 and self&lt;>' '"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self&lt;>0"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="self.size()&lt;>0 and self&lt;>' ' "/>
+    </providers>
+  </expressionProviders>
 </gmfgen:GenEditorGenerator>

@@ -346,6 +346,27 @@ public class GraphEditorBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
+		private static final String OPPOSITE_END_VAR = "oppositeEnd"; //$NON-NLS-1$
+		/**
+		 * @generated
+		 */
+		private static graphEditor.diagram.expressions.GraphEditorAbstractExpression Edge_4001_SourceExpression;
+		/**
+		 * @generated
+		 */
+		private static graphEditor.diagram.expressions.GraphEditorAbstractExpression Edge_4001_TargetExpression;
+		/**
+		 * @generated
+		 */
+		private static graphEditor.diagram.expressions.GraphEditorAbstractExpression Message_4002_SourceExpression;
+		/**
+		 * @generated
+		 */
+		private static graphEditor.diagram.expressions.GraphEditorAbstractExpression Message_4002_TargetExpression;
+
+		/**
+		 * @generated
+		 */
 		public static boolean canCreateEdge_4001(graphEditor.Graph container,
 				graphEditor.Node source, graphEditor.Node target) {
 			return canExistEdge_4001(container, source, target);
@@ -365,8 +386,46 @@ public class GraphEditorBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		 */
 		public static boolean canExistEdge_4001(graphEditor.Graph container,
 				graphEditor.Node source, graphEditor.Node target) {
-
-			return true;
+			try {
+				if (source == null) {
+					return true;
+				}
+				if (Edge_4001_SourceExpression == null) {
+					Map env = Collections.singletonMap(OPPOSITE_END_VAR,
+							graphEditor.GraphEditorPackage.eINSTANCE.getNode());
+					Edge_4001_SourceExpression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+							.getExpression(
+									"self <> oppositeEnd", graphEditor.GraphEditorPackage.eINSTANCE.getNode(), env); //$NON-NLS-1$
+				}
+				Object sourceVal = Edge_4001_SourceExpression.evaluate(source,
+						Collections.singletonMap(OPPOSITE_END_VAR, target));
+				if (false == sourceVal instanceof Boolean
+						|| !((Boolean) sourceVal).booleanValue()) {
+					return false;
+				} // else fall-through
+				if (target == null) {
+					return true;
+				}
+				if (Edge_4001_TargetExpression == null) {
+					Map env = Collections.singletonMap(OPPOSITE_END_VAR,
+							graphEditor.GraphEditorPackage.eINSTANCE.getNode());
+					Edge_4001_TargetExpression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+							.getExpression(
+									"self.oclIsTypeOf(Factornode) <> oppositeEnd.oclIsTypeOf(Factornode) \r\nand\r\nself.oclIsTypeOf(Variablenode) <> oppositeEnd.oclIsTypeOf(Variablenode) \r\n", graphEditor.GraphEditorPackage.eINSTANCE.getNode(), env); //$NON-NLS-1$
+				}
+				Object targetVal = Edge_4001_TargetExpression.evaluate(target,
+						Collections.singletonMap(OPPOSITE_END_VAR, source));
+				if (false == targetVal instanceof Boolean
+						|| !((Boolean) targetVal).booleanValue()) {
+					return false;
+				} // else fall-through
+				return true;
+			} catch (Exception e) {
+				graphEditor.diagram.part.GraphEditorDiagramEditorPlugin
+						.getInstance().logError(
+								"Link constraint evaluation error", e); //$NON-NLS-1$
+				return false;
+			}
 		}
 
 		/**
@@ -374,8 +433,48 @@ public class GraphEditorBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		 */
 		public static boolean canExistMessage_4002(graphEditor.Graph container,
 				graphEditor.Node source, graphEditor.Node target) {
-
-			return true;
+			try {
+				if (source == null) {
+					return true;
+				}
+				if (Message_4002_SourceExpression == null) {
+					Map env = Collections.singletonMap(OPPOSITE_END_VAR,
+							graphEditor.GraphEditorPackage.eINSTANCE.getNode());
+					Message_4002_SourceExpression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+							.getExpression(
+									"self <> oppositeEnd", graphEditor.GraphEditorPackage.eINSTANCE.getNode(), env); //$NON-NLS-1$
+				}
+				Object sourceVal = Message_4002_SourceExpression.evaluate(
+						source, Collections.singletonMap(OPPOSITE_END_VAR,
+								target));
+				if (false == sourceVal instanceof Boolean
+						|| !((Boolean) sourceVal).booleanValue()) {
+					return false;
+				} // else fall-through
+				if (target == null) {
+					return true;
+				}
+				if (Message_4002_TargetExpression == null) {
+					Map env = Collections.singletonMap(OPPOSITE_END_VAR,
+							graphEditor.GraphEditorPackage.eINSTANCE.getNode());
+					Message_4002_TargetExpression = graphEditor.diagram.expressions.GraphEditorOCLFactory
+							.getExpression(
+									"self.oclIsTypeOf(Factornode) <> oppositeEnd.oclIsTypeOf(Factornode) \r\nand\r\nself.oclIsTypeOf(Variablenode) <> oppositeEnd.oclIsTypeOf(Variablenode) \r\n", graphEditor.GraphEditorPackage.eINSTANCE.getNode(), env); //$NON-NLS-1$
+				}
+				Object targetVal = Message_4002_TargetExpression.evaluate(
+						target, Collections.singletonMap(OPPOSITE_END_VAR,
+								source));
+				if (false == targetVal instanceof Boolean
+						|| !((Boolean) targetVal).booleanValue()) {
+					return false;
+				} // else fall-through
+				return true;
+			} catch (Exception e) {
+				graphEditor.diagram.part.GraphEditorDiagramEditorPlugin
+						.getInstance().logError(
+								"Link constraint evaluation error", e); //$NON-NLS-1$
+				return false;
+			}
 		}
 	}
 

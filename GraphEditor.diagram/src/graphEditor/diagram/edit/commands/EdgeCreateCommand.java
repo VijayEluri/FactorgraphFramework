@@ -40,7 +40,7 @@ public class EdgeCreateCommand extends CreateElementCommand {
 		this.target = target;
 		if (request.getContainmentFeature() == null) {
 			setContainmentFeature(graphEditor.GraphEditorPackage.eINSTANCE
-					.getGraph_Connections());
+					.getGraph_Edges());
 		}
 
 		// Find container element for the new link.
@@ -86,9 +86,9 @@ public class EdgeCreateCommand extends CreateElementCommand {
 	protected EObject doDefaultElementCreation() {
 		graphEditor.Edge newElement = graphEditor.GraphEditorFactory.eINSTANCE
 				.createEdge();
-		getContainer().getConnections().add(newElement);
-		newElement.setParent(getSource());
-		newElement.setChild(getTarget());
+		getContainer().getEdges().add(newElement);
+		newElement.setFrom(getSource());
+		newElement.setTo(getTarget());
 		return newElement;
 	}
 
