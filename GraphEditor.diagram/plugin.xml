@@ -436,17 +436,6 @@
       </objectContribution>
       <objectContribution
             adaptable="false"
-            id="GraphEditor.diagram.VariablenodeTable"
-            objectClass="graphEditor.diagram.edit.parts.VariablenodeEditPart">
-         <action
-               class="graphEditor.factorgraph.TableAction"
-               id="GraphEditor.diagram.VariablenodeTableAction"
-               label="Edit Data Table..."
-               menubarPath="factorgraph">
-         </action>
-      </objectContribution>
-      <objectContribution
-            adaptable="false"
             id="GraphEditor.diagram.GraphEditor.diagram.FactornodeTable"
             objectClass="graphEditor.diagram.edit.parts.FactornodeEditPart">
          <action

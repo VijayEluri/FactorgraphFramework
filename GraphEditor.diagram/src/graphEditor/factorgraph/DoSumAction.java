@@ -128,13 +128,13 @@ public class DoSumAction implements IObjectActionDelegate {
 
 			de.lmu.genzentrum.tresch.Graph factorgraph = new de.lmu.genzentrum.tresch.Graph(messages);
 			SumProduct sum = new SumProduct();
-			sum.doSum(factorgraph);
+		//	sum.doSum(factorgraph);
 			factorgraph.print();
 
 		} catch (InterruptedException e) {
-		} catch (NoValueException e) {
+		} /*catch (NoValueException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	@Override
