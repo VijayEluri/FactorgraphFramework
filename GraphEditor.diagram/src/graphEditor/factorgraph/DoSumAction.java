@@ -67,9 +67,9 @@ public class DoSumAction implements IObjectActionDelegate {
 			domain = mySelectedElement.getEditingDomain();
 
 		graphEditor.Graph graph = null;
-		final Resource r = domain.getResourceSet().getResources().get(0);
 
 		try {
+			final Resource r = domain.getResourceSet().getResources().get(0);
 			graph = (graphEditor.Graph) domain
 					.runExclusive(new RunnableWithResult.Impl() {
 						public void run() {
@@ -78,7 +78,6 @@ public class DoSumAction implements IObjectActionDelegate {
 
 						}
 					});
-
 			LinkedList<de.lmu.genzentrum.tresch.Message> messages = new LinkedList<de.lmu.genzentrum.tresch.Message>();
 
 			EList<Message> mesg = graph.getMessages();
@@ -90,51 +89,68 @@ public class DoSumAction implements IObjectActionDelegate {
 				
 				if (nodeFrom instanceof Variablenode) {
 					List values=((Variablenode) nodeFrom).getValues();
-					Double[] oa=(Double[])values.toArray();
-					double[] arrayvalues=new double[oa.length];
-					for (int i=0;i<oa.length;i++){
-						arrayvalues[i]=oa[i].doubleValue();
-					}					
-					from = new de.lmu.genzentrum.tresch.VariableNode(nodeFrom.getName(),(int)nodeFrom.getId(),arrayvalues);
-					System.out.println(nodeFrom.getName()+"-"+(int)nodeFrom.getId()+"-"+Arrays.toString(arrayvalues));
+					Double[] da=(Double[])values.toArray();
+					double[] arrayvalues=new double[da.length];
+					for (int i=0;i<da.length;i++){
+						arrayvalues[i]=da[i].doubleValue();
+					}	
+					Object[] oa=new Object[da.length];
+					for (int i=0;i<da.length;i++){
+						oa[i]=da[i].doubleValue();
+					}
+					
+					from = new de.lmu.genzentrum.tresch.VariableNode(nodeFrom.getName(),(int)nodeFrom.getId(),oa,false);
 				}
 				if (nodeFrom instanceof Factornode) {
 					double[][] values=((Factornode) nodeFrom).getValues();
-					from = new de.lmu.genzentrum.tresch.FactorNode(nodeFrom.getName(),(int)nodeFrom.getId(),values);
-					System.out.println(nodeFrom.getName()+"-"+(int)nodeFrom.getId()+"-"+Arrays.toString(values));
+					Object[][] oa=new Object[values.length][values[0].length];
+					for(int i=0;i<values.length;i++)
+						for(int j=0;j<values[0].length;j++)
+							oa[i][j]=values[i][j];
+					from = new de.lmu.genzentrum.tresch.FactorNode(nodeFrom.getName(),(int)nodeFrom.getId(),oa);
 				}
 				
 				Node nodeTo = m.getTo();
 				de.lmu.genzentrum.tresch.Node to=null;
 				if (nodeTo instanceof Variablenode) {
 					List values=((Variablenode) nodeTo).getValues();
-					Double[] oa=(Double[])values.toArray();
-					double[] arrayvalues=new double[oa.length];
-					for (int i=0;i<oa.length;i++){
-						arrayvalues[i]=oa[i].doubleValue();
+					Double[] da=(Double[])values.toArray();
+					double[] arrayvalues=new double[da.length];
+					for (int i=0;i<da.length;i++){
+						arrayvalues[i]=da[i].doubleValue();
 					}					
-					to = new de.lmu.genzentrum.tresch.VariableNode(nodeTo.getName(),(int)nodeTo.getId(),arrayvalues);
-					System.out.println(nodeTo.getName()+"-"+(int)nodeTo.getId()+"-"+Arrays.toString(arrayvalues));
+					Object[] oa=new Object[da.length];
+					for (int i=0;i<da.length;i++){
+						oa[i]=da[i].doubleValue();
+					}
+					to = new de.lmu.genzentrum.tresch.VariableNode(nodeTo.getName(),(int)nodeTo.getId(),oa,false);
 				}
 				if (nodeTo instanceof Factornode) {
 					double[][] values=((Factornode) nodeTo).getValues();
-					to = new de.lmu.genzentrum.tresch.FactorNode(nodeTo.getName(),(int)nodeTo.getId(),values);
-					System.out.println(nodeTo.getName()+"-"+(int)nodeTo.getId()+"-"+Arrays.toString(values));
+					Object[][] oa=new Object[values.length][values[0].length];
+					for(int i=0;i<values.length;i++)
+						for(int j=0;j<values[0].length;j++)
+							oa[i][j]=values[i][j];
+
+					to = new de.lmu.genzentrum.tresch.FactorNode(nodeTo.getName(),(int)nodeTo.getId(),oa);
 				}
 
 				de.lmu.genzentrum.tresch.Message message = new de.lmu.genzentrum.tresch.Message(from, to);
+				System.out.println("message: "+from.getName()+"->"+to.getName());
 				messages.add(message);
 			}
 
 			de.lmu.genzentrum.tresch.Graph factorgraph = new de.lmu.genzentrum.tresch.Graph(messages);
-			SumProduct sum = new SumProduct();
-		//	sum.doSum(factorgraph);
+			SumProduct sum = new SumProduct(factorgraph);
+			System.out.println("do sum product");
+			sum.doSum();
 			factorgraph.print();
 
 		} catch (InterruptedException e) {
-		} /*catch (NoValueException e) {
 			e.printStackTrace();
-		}*/
+		} catch (NoValueException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -115,7 +115,6 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
 	 */
 	public Graph createGraph() {
 		GraphImpl graph = new GraphImpl();
@@ -125,7 +124,6 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
 	 */
 	public Factornode createFactornode() {
 		FactornodeImpl factornode = new FactornodeImpl();
@@ -135,7 +133,6 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
 	 */
 	public Variablenode createVariablenode() {
 		VariablenodeImpl variablenode = new VariablenodeImpl();
@@ -145,7 +142,6 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
 	 */
 	public Message createMessage() {
 		MessageImpl message = new MessageImpl();
@@ -155,7 +151,6 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
 	 */
 	public Edge createEdge() {
 		EdgeImpl edge = new EdgeImpl();
@@ -297,10 +292,10 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 	}
 
 	private static long generate_id_counter = 0;
-	private static long generate_variable_id_counter = -1;
-	private static long generate_factor_id_counter = -1;
-	private static long generate_graph_id_counter = 0;
-	private static int generate_message_id_counter = -1;
+	private static long generate_variable_counter = -1;
+	private static long generate_factor_counter = -1;
+	private static long generate_graph_counter = 0;
+	private static int generate_message_counter = -1;
 
 	/**
 	 * We want a way to generate IDs that we know are unique between different
@@ -322,27 +317,34 @@ public class GraphEditorFactoryImpl extends EFactoryImpl implements
 	protected void generateID(EObject obj) {
 		if (obj instanceof Graph) {
 			Graph ge = (Graph) obj;
-			generate_graph_id_counter++;
-			ge.setName("Graph" + Long.toString(generate_graph_id_counter));
+			generate_graph_counter++;
+			ge.setName("Graph" + Long.toString(generate_graph_counter));
 		}
 		if (obj instanceof Factornode) {
 			Node ge = (Node) obj;
-			generate_factor_id_counter++;
+			generate_factor_counter++;
 			generate_id_counter++;
 			ge.setId(generate_id_counter);
-			ge.setName("F" + Long.toString(generate_factor_id_counter));
+			ge.setName("F" + Long.toString(generate_factor_counter));
 		}
 		if (obj instanceof Variablenode) {
 			Node ge = (Node) obj;
-			generate_variable_id_counter++;
+			generate_variable_counter++;
 			generate_id_counter++;
 			ge.setId(generate_id_counter);
-			ge.setName("X" + Long.toString(generate_variable_id_counter));
+			ge.setName("X" + Long.toString(generate_variable_counter));
+		}
+		if (obj instanceof Edge) {
+			Edge ge = (Edge) obj;
+			generate_id_counter++;
+			ge.setId(generate_id_counter);
 		}
 		if (obj instanceof Message) {
 			Message ge = (Message) obj;
-			generate_message_id_counter++;
-			ge.setCount(generate_message_id_counter);
+			generate_message_counter++;
+			generate_id_counter++;
+			ge.setId(generate_id_counter);
+			ge.setCount(generate_message_counter);
 		}
 	}
 

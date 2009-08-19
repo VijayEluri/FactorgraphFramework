@@ -49,11 +49,13 @@ public class GraphEditorElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType Variablenode_2001 = getElementType("GraphEditor.diagram.Variablenode_2001"); //$NON-NLS-1$
+	public static final IElementType Factornode_2001 = getElementType("GraphEditor.diagram.Factornode_2001"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
-	public static final IElementType Factornode_2002 = getElementType("GraphEditor.diagram.Factornode_2002"); //$NON-NLS-1$
+	public static final IElementType Variablenode_2002 = getElementType("GraphEditor.diagram.Variablenode_2002"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
@@ -177,10 +179,10 @@ public class GraphEditorElementTypes extends ElementInitializers {
 			elements.put(Graph_1000, graphEditor.GraphEditorPackage.eINSTANCE
 					.getGraph());
 
-			elements.put(Factornode_2002,
+			elements.put(Factornode_2001,
 					graphEditor.GraphEditorPackage.eINSTANCE.getFactornode());
 
-			elements.put(Variablenode_2001,
+			elements.put(Variablenode_2002,
 					graphEditor.GraphEditorPackage.eINSTANCE.getVariablenode());
 
 			elements.put(Edge_4001, graphEditor.GraphEditorPackage.eINSTANCE
@@ -206,8 +208,8 @@ public class GraphEditorElementTypes extends ElementInitializers {
 		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet();
 			KNOWN_ELEMENT_TYPES.add(Graph_1000);
-			KNOWN_ELEMENT_TYPES.add(Factornode_2002);
-			KNOWN_ELEMENT_TYPES.add(Variablenode_2001);
+			KNOWN_ELEMENT_TYPES.add(Factornode_2001);
+			KNOWN_ELEMENT_TYPES.add(Variablenode_2002);
 			KNOWN_ELEMENT_TYPES.add(Edge_4001);
 			KNOWN_ELEMENT_TYPES.add(Message_4002);
 		}

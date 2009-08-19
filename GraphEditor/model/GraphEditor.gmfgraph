@@ -69,11 +69,11 @@
     </descriptors>
   </figures>
   <nodes
-      name="Variablenode"
-      figure="VariablenodeFigure"/>
-  <nodes
       name="Factornode"
       figure="FactornodeFigure"/>
+  <nodes
+      name="Variablenode"
+      figure="VariablenodeFigure"/>
   <connections
       name="Edge"
       figure="EdgeFigure"/>

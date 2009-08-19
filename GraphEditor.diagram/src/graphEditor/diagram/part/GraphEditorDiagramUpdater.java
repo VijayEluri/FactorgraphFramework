@@ -42,13 +42,13 @@ public class GraphEditorDiagramUpdater {
 			graphEditor.Node childElement = (graphEditor.Node) it.next();
 			int visualID = graphEditor.diagram.part.GraphEditorVisualIDRegistry
 					.getNodeVisualID(view, childElement);
-			if (visualID == graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID) {
+			if (visualID == graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID) {
 				result
 						.add(new graphEditor.diagram.part.GraphEditorNodeDescriptor(
 								childElement, visualID));
 				continue;
 			}
-			if (visualID == graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID) {
+			if (visualID == graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID) {
 				result
 						.add(new graphEditor.diagram.part.GraphEditorNodeDescriptor(
 								childElement, visualID));
@@ -66,10 +66,10 @@ public class GraphEditorDiagramUpdater {
 				.getVisualID(view)) {
 		case graphEditor.diagram.edit.parts.GraphEditPart.VISUAL_ID:
 			return getGraph_1000ContainedLinks(view);
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
-			return getFactornode_2002ContainedLinks(view);
 		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
-			return getVariablenode_2001ContainedLinks(view);
+			return getFactornode_2001ContainedLinks(view);
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
+			return getVariablenode_2002ContainedLinks(view);
 		case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:
 			return getEdge_4001ContainedLinks(view);
 		case graphEditor.diagram.edit.parts.MessageEditPart.VISUAL_ID:
@@ -84,10 +84,10 @@ public class GraphEditorDiagramUpdater {
 	public static List getIncomingLinks(View view) {
 		switch (graphEditor.diagram.part.GraphEditorVisualIDRegistry
 				.getVisualID(view)) {
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
-			return getFactornode_2002IncomingLinks(view);
 		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
-			return getVariablenode_2001IncomingLinks(view);
+			return getFactornode_2001IncomingLinks(view);
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
+			return getVariablenode_2002IncomingLinks(view);
 		case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:
 			return getEdge_4001IncomingLinks(view);
 		case graphEditor.diagram.edit.parts.MessageEditPart.VISUAL_ID:
@@ -102,10 +102,10 @@ public class GraphEditorDiagramUpdater {
 	public static List getOutgoingLinks(View view) {
 		switch (graphEditor.diagram.part.GraphEditorVisualIDRegistry
 				.getVisualID(view)) {
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
-			return getFactornode_2002OutgoingLinks(view);
 		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
-			return getVariablenode_2001OutgoingLinks(view);
+			return getFactornode_2001OutgoingLinks(view);
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
+			return getVariablenode_2002OutgoingLinks(view);
 		case graphEditor.diagram.edit.parts.EdgeEditPart.VISUAL_ID:
 			return getEdge_4001OutgoingLinks(view);
 		case graphEditor.diagram.edit.parts.MessageEditPart.VISUAL_ID:
@@ -129,14 +129,14 @@ public class GraphEditorDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getVariablenode_2001ContainedLinks(View view) {
+	public static List getFactornode_2001ContainedLinks(View view) {
 		return Collections.EMPTY_LIST;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getFactornode_2002ContainedLinks(View view) {
+	public static List getVariablenode_2002ContainedLinks(View view) {
 		return Collections.EMPTY_LIST;
 	}
 
@@ -157,8 +157,8 @@ public class GraphEditorDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getVariablenode_2001IncomingLinks(View view) {
-		graphEditor.Variablenode modelElement = (graphEditor.Variablenode) view
+	public static List getFactornode_2001IncomingLinks(View view) {
+		graphEditor.Factornode modelElement = (graphEditor.Factornode) view
 				.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
@@ -173,8 +173,8 @@ public class GraphEditorDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getFactornode_2002IncomingLinks(View view) {
-		graphEditor.Factornode modelElement = (graphEditor.Factornode) view
+	public static List getVariablenode_2002IncomingLinks(View view) {
+		graphEditor.Variablenode modelElement = (graphEditor.Variablenode) view
 				.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
@@ -203,8 +203,8 @@ public class GraphEditorDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getVariablenode_2001OutgoingLinks(View view) {
-		graphEditor.Variablenode modelElement = (graphEditor.Variablenode) view
+	public static List getFactornode_2001OutgoingLinks(View view) {
+		graphEditor.Factornode modelElement = (graphEditor.Factornode) view
 				.getElement();
 		List result = new LinkedList();
 		result.addAll(getOutgoingTypeModelFacetLinks_Edge_4001(modelElement));
@@ -216,8 +216,8 @@ public class GraphEditorDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getFactornode_2002OutgoingLinks(View view) {
-		graphEditor.Factornode modelElement = (graphEditor.Factornode) view
+	public static List getVariablenode_2002OutgoingLinks(View view) {
+		graphEditor.Variablenode modelElement = (graphEditor.Variablenode) view
 				.getElement();
 		List result = new LinkedList();
 		result.addAll(getOutgoingTypeModelFacetLinks_Edge_4001(modelElement));

@@ -66,7 +66,7 @@ public interface Variablenode extends Node {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Values</em>' attribute list.
 	 * @see graphEditor.GraphEditorPackage#getVariablenode_Values()
-	 * @model default="0"
+	 * @model default="0" lower="2" upper="2"
 	 * @generated
 	 */
 	EList<Double> getValues();

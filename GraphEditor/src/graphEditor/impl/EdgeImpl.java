@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class EdgeImpl extends EObjectImpl implements Edge {
+public class EdgeImpl extends GraphElementImpl implements Edge {
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->

@@ -1,8 +1,8 @@
-#Wed Aug 05 12:43:24 CEST 2009
+#Fri Aug 14 09:29:55 CEST 2009
 eclipse.preferences.version=1
 gmf_dashboard/domainGenerationModel=platform\:/resource/GraphEditor/model/GraphEditor.genmodel
 gmf_dashboard/domainModel=platform\:/resource/GraphEditor/model/GraphEditor.ecore
 gmf_dashboard/generationModel=platform\:/resource/GraphEditor/model/GraphEditor.gmfgen
 gmf_dashboard/graphicalDefinitionModel=platform\:/resource/GraphEditor/model/GraphEditor.gmfgraph
-gmf_dashboard/mappingModel=platform\:/resource/GraphEditor/model/GraphEditor3.gmfmap
+gmf_dashboard/mappingModel=platform\:/resource/GraphEditor/model/GraphEditor.gmfmap
 gmf_dashboard/toolingDefinitionModel=platform\:/resource/GraphEditor/model/GraphEditor.gmftool

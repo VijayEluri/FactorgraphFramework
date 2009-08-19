@@ -66,7 +66,7 @@ public class FactornodeImpl extends NodeImpl implements Factornode {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double[][] VALUES_EDEFAULT = (double[][])GraphEditorFactory.eINSTANCE.createFromString(GraphEditorPackage.eINSTANCE.getTable(), "1x2!{[0,1]}");
+	protected static final double[][] VALUES_EDEFAULT = (double[][])GraphEditorFactory.eINSTANCE.createFromString(GraphEditorPackage.eINSTANCE.getTable(), "null");
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' attribute.

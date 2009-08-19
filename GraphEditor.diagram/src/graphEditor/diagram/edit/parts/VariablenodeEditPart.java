@@ -1,5 +1,6 @@
 package graphEditor.diagram.edit.parts;
 
+import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
@@ -92,15 +93,15 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		FactornodeFigure figure = new FactornodeFigure();
+		VariablenodeFigure figure = new VariablenodeFigure();
 		return primaryShape = figure;
 	}
 
 	/**
 	 * @generated
 	 */
-	public FactornodeFigure getPrimaryShape() {
-		return (FactornodeFigure) primaryShape;
+	public VariablenodeFigure getPrimaryShape() {
+		return (VariablenodeFigure) primaryShape;
 	}
 
 	/**
@@ -109,7 +110,8 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof graphEditor.diagram.edit.parts.FactornodeNameEditPart) {
 			((graphEditor.diagram.edit.parts.FactornodeNameEditPart) childEditPart)
-					.setLabel(getPrimaryShape().getFigureFactornodeNameFigure());
+					.setLabel(getPrimaryShape()
+							.getFigureVariablenodeNameFigure());
 			return true;
 		}
 		return false;
@@ -213,17 +215,17 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public class FactornodeFigure extends RectangleFigure {
+	public class VariablenodeFigure extends Ellipse {
 
 		/**
 		 * @generated
 		 */
-		private WrappingLabel fFigureFactornodeNameFigure;
+		private WrappingLabel fFigureVariablenodeNameFigure;
 
 		/**
 		 * @generated
 		 */
-		public FactornodeFigure() {
+		public VariablenodeFigure() {
 
 			FlowLayout layoutThis = new FlowLayout();
 			layoutThis.setStretchMinorAxis(false);
@@ -245,10 +247,10 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 		 */
 		private void createContents() {
 
-			fFigureFactornodeNameFigure = new WrappingLabel();
-			fFigureFactornodeNameFigure.setText("<...>");
+			fFigureVariablenodeNameFigure = new WrappingLabel();
+			fFigureVariablenodeNameFigure.setText("<...>");
 
-			this.add(fFigureFactornodeNameFigure);
+			this.add(fFigureVariablenodeNameFigure);
 
 		}
 
@@ -274,8 +276,8 @@ public class VariablenodeEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		public WrappingLabel getFigureFactornodeNameFigure() {
-			return fFigureFactornodeNameFigure;
+		public WrappingLabel getFigureVariablenodeNameFigure() {
+			return fFigureVariablenodeNameFigure;
 		}
 
 	}

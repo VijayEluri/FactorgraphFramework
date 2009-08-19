@@ -7,6 +7,7 @@
 package graphEditor.provider;
 
 
+import graphEditor.Edge;
 import graphEditor.GraphEditorPackage;
 
 import java.util.Collection;
@@ -33,7 +34,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * @generated
  */
 public class EdgeItemProvider
-	extends ItemProviderAdapter
+	extends GraphElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -130,7 +131,8 @@ public class EdgeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Edge_type");
+		Edge edge = (Edge)object;
+		return getString("_UI_Edge_type") + " " + edge.getId();
 	}
 
 	/**
@@ -156,17 +158,6 @@ public class EdgeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return GraphEditorEditPlugin.INSTANCE;
 	}
 
 }

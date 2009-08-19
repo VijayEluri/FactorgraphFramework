@@ -150,7 +150,8 @@ public class GraphEditorValidationProvider extends
 		 */
 		public IStatus validate(IValidationContext ctx) {
 			final Object context = ctx.getTarget().eGet(
-					graphEditor.GraphEditorPackage.eINSTANCE.getNode_Id());
+					graphEditor.GraphEditorPackage.eINSTANCE
+							.getGraphElement_Id());
 			if (context == null) {
 				return ctx.createFailureStatus(new Object[] { formatElement(ctx
 						.getTarget()) });

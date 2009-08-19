@@ -340,22 +340,22 @@
       </metamodel>
       <metamodel nsURI="http://de.broicher.factorgraph.graphEditor">
          <metamodelType
-               id="GraphEditor.diagram.Factornode_2002"
-               name="%metatype.name.Factornode_2002"
+               id="GraphEditor.diagram.Factornode_2001"
+               name="%metatype.name.Factornode_2001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Factornode"
-               edithelper="graphEditor.diagram.edit.helpers.VariablenodeEditHelper">
-            <param name="semanticHint" value="2002"/>
+               edithelper="graphEditor.diagram.edit.helpers.FactornodeEditHelper">
+            <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://de.broicher.factorgraph.graphEditor">
          <metamodelType
-               id="GraphEditor.diagram.Variablenode_2001"
-               name="%metatype.name.Variablenode_2001"
+               id="GraphEditor.diagram.Variablenode_2002"
+               name="%metatype.name.Variablenode_2002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Variablenode"
-               edithelper="graphEditor.diagram.edit.helpers.FactornodeEditHelper">
-            <param name="semanticHint" value="2001"/>
+               edithelper="graphEditor.diagram.edit.helpers.VariablenodeEditHelper">
+            <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://de.broicher.factorgraph.graphEditor">
@@ -391,8 +391,8 @@
       </clientContext> 
       <binding context="GraphEditor.diagram.TypeContext">
          <elementType ref="GraphEditor.diagram.Graph_1000"/>
-         <elementType ref="GraphEditor.diagram.Factornode_2002"/>
-         <elementType ref="GraphEditor.diagram.Variablenode_2001"/>
+         <elementType ref="GraphEditor.diagram.Factornode_2001"/>
+         <elementType ref="GraphEditor.diagram.Variablenode_2002"/>
          <elementType ref="GraphEditor.diagram.Edge_4001"/>
          <elementType ref="GraphEditor.diagram.Message_4002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
@@ -434,17 +434,6 @@
                menubarPath="factorgraph">
          </action>
       </objectContribution>
-      <objectContribution
-            adaptable="false"
-            id="GraphEditor.diagram.GraphEditor.diagram.FactornodeTable"
-            objectClass="graphEditor.diagram.edit.parts.FactornodeEditPart">
-         <action
-               class="graphEditor.factorgraph.TableAction"
-               id="GraphEditor.diagram.FactornodeTableAction"
-               label="Edit Data Table..."
-               menubarPath="factorgraph">
-         </action>
-      </objectContribution>
    </extension><extension point="org.eclipse.emf.validation.constraintProviders">
       <?gmfgen generated="true"?>
             <category id="auditContainerId" mandatory="false" name="auditContainer">
@@ -471,15 +460,15 @@
             <message><![CDATA[Node has no Name]]></message>
             <target class="graphEditor.Node"/>
          </constraint>
-                  <constraint id="nodeIdRuleId"
+                  <constraint id="graphElementIdRuleId"
             lang="Java" class="graphEditor.diagram.providers.GraphEditorValidationProvider$Adapter2"
-            name="nodeIdRule"
+            name="graphElementIdRule"
             mode="Batch"
             severity="ERROR" statusCode="200">
             
             <description><![CDATA[]]></description>
-            <message><![CDATA[Node has no ID]]></message>
-            <target class="graphEditor.Node"/>
+            <message><![CDATA[Graph Element has no ID]]></message>
+            <target class="graphEditor.GraphElement"/>
          </constraint>
                   </constraints>
          <constraints categories="auditContainerId/graphRuleId">
@@ -503,10 +492,24 @@
       </clientContext>
       <binding context="GraphEditor.diagramDefaultCtx">
                   <constraint ref="GraphEditor.diagram.nodeNameRuleId"/>
-                  <constraint ref="GraphEditor.diagram.nodeIdRuleId"/>
+                  <constraint ref="GraphEditor.diagram.graphElementIdRuleId"/>
                   <constraint ref="GraphEditor.diagram.graphNameRuleId"/>
                </binding>
 
    </extension>
+<extension
+      point="org.eclipse.ui.views">
+   <category
+         id="GraphEditor.diagram.view.DataTable"
+         name="Factorgraph">
+   </category>
+   <view
+         category="GraphEditor.diagram.view.DataTable"
+         class="graphEditor.factorgraph.view.DataTableView"
+         icon="icons/obj16/GraphEditorDiagramFile.gif"
+         id="graphEditor.factorgraph.view.DataTableView"
+         name="Data Table">
+   </view>
+</extension>
 
 </plugin>

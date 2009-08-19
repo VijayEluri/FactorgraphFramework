@@ -36,17 +36,17 @@
       </target>
     </rules>
     <rules
-        name="nodeIdRule"
-        id="nodeIdRuleId"
+        name="graphElementIdRule"
+        id="graphElementIdRuleId"
         rule="//@expressionProviders/@providers.0/@expressions.5"
-        message="Node has no ID"
+        message="Graph Element has no ID"
         category="//@audits/@categories.1">
       <target
           xsi:type="gmfgen:GenDomainAttributeTarget"
           contextSelector="//@audits/@clientContexts.0"
           nullAsError="true">
         <attribute
-            href="GraphEditor.genmodel#//graphEditor/Node/id"/>
+            href="GraphEditor.genmodel#//graphEditor/GraphElement/id"/>
       </target>
     </rules>
     <rules
@@ -87,18 +87,18 @@
     <domainDiagramElement
         href="GraphEditor.genmodel#//graphEditor/Graph"/>
     <topLevelNodes
-        visualID="2002"
-        editPartClassName="VariablenodeEditPart"
-        itemSemanticEditPolicyClassName="VariablenodeItemSemanticEditPolicy"
-        notationViewFactoryClassName="VariablenodeViewFactory"
-        canonicalEditPolicyClassName="VariablenodeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="VariablenodeGraphicalNodeEditPolicy"
-        createCommandClassName="VariablenodeCreateCommand">
+        visualID="2001"
+        editPartClassName="FactornodeEditPart"
+        itemSemanticEditPolicyClassName="FactornodeItemSemanticEditPolicy"
+        notationViewFactoryClassName="FactornodeViewFactory"
+        canonicalEditPolicyClassName="FactornodeCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="FactornodeGraphicalNodeEditPolicy"
+        createCommandClassName="FactornodeCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="VariablenodeEditHelper"/>
+          editHelperClassName="FactornodeEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -116,10 +116,10 @@
             href="GraphEditor.genmodel#//graphEditor/Graph/nodes"/>
       </modelFacet>
       <labels
-          visualID="5002"
-          editPartClassName="FactornodeNameEditPart"
-          itemSemanticEditPolicyClassName="FactornodeNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="FactornodeNameViewFactory">
+          visualID="5001"
+          editPartClassName="VariablenodeNameEditPart"
+          itemSemanticEditPolicyClassName="VariablenodeNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="VariablenodeNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -134,18 +134,18 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="2001"
-        editPartClassName="FactornodeEditPart"
-        itemSemanticEditPolicyClassName="FactornodeItemSemanticEditPolicy"
-        notationViewFactoryClassName="FactornodeViewFactory"
-        canonicalEditPolicyClassName="FactornodeCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="FactornodeGraphicalNodeEditPolicy"
-        createCommandClassName="FactornodeCreateCommand">
+        visualID="2002"
+        editPartClassName="VariablenodeEditPart"
+        itemSemanticEditPolicyClassName="VariablenodeItemSemanticEditPolicy"
+        notationViewFactoryClassName="VariablenodeViewFactory"
+        canonicalEditPolicyClassName="VariablenodeCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="VariablenodeGraphicalNodeEditPolicy"
+        createCommandClassName="VariablenodeCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="FactornodeEditHelper"/>
+          editHelperClassName="VariablenodeEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           layoutType="FLOW_LAYOUT"
@@ -163,10 +163,10 @@
             href="GraphEditor.genmodel#//graphEditor/Graph/nodes"/>
       </modelFacet>
       <labels
-          visualID="5001"
-          editPartClassName="VariablenodeNameEditPart"
-          itemSemanticEditPolicyClassName="VariablenodeNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="VariablenodeNameViewFactory">
+          visualID="5002"
+          editPartClassName="FactornodeNameEditPart"
+          itemSemanticEditPolicyClassName="FactornodeNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="FactornodeNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

@@ -12,6 +12,7 @@ import graphEditor.FunctionType;
 import graphEditor.Graph;
 import graphEditor.GraphEditorFactory;
 import graphEditor.GraphEditorPackage;
+import graphEditor.GraphElement;
 import graphEditor.Message;
 import graphEditor.MessageType;
 import graphEditor.Node;
@@ -42,6 +43,13 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 	 * @generated
 	 */
 	private EClass graphEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass graphElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -224,6 +232,24 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGraphElement() {
+		return graphElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGraphElement_Id() {
+		return (EAttribute)graphElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -233,17 +259,8 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNode_Id() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getNode_Name() {
-		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -442,8 +459,10 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 		createEReference(graphEClass, GRAPH__EDGES);
 		createEReference(graphEClass, GRAPH__MESSAGES);
 
+		graphElementEClass = createEClass(GRAPH_ELEMENT);
+		createEAttribute(graphElementEClass, GRAPH_ELEMENT__ID);
+
 		nodeEClass = createEClass(NODE);
-		createEAttribute(nodeEClass, NODE__ID);
 		createEAttribute(nodeEClass, NODE__NAME);
 
 		factornodeEClass = createEClass(FACTORNODE);
@@ -501,8 +520,11 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		nodeEClass.getESuperTypes().add(this.getGraphElement());
 		factornodeEClass.getESuperTypes().add(this.getNode());
 		variablenodeEClass.getESuperTypes().add(this.getNode());
+		messageEClass.getESuperTypes().add(this.getGraphElement());
+		edgeEClass.getESuperTypes().add(this.getGraphElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(graphEClass, Graph.class, "Graph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -511,8 +533,16 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 		initEReference(getGraph_Edges(), this.getEdge(), null, "edges", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGraph_Messages(), this.getMessage(), null, "messages", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(graphEClass, this.getGraphElement(), "getGraphElement", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "id", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(graphEClass, this.getVariablenode(), "getConnectingVariablenodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getFactornode(), "node", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(graphElementEClass, GraphElement.class, "GraphElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGraphElement_Id(), ecorePackage.getELong(), "id", null, 1, 1, GraphElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(nodeEClass, Node.class, "Node", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNode_Id(), ecorePackage.getELong(), "id", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Name(), ecorePackage.getEString(), "name", "", 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(factornodeEClass, Factornode.class, "Factornode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -521,7 +551,7 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 
 		initEClass(variablenodeEClass, Variablenode.class, "Variablenode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariablenode_Type(), this.getVariableType(), "type", null, 1, 1, Variablenode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariablenode_Values(), ecorePackage.getEDouble(), "values", "0", 0, -1, Variablenode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVariablenode_Values(), ecorePackage.getEDouble(), "values", "0", 2, 2, Variablenode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMessage_Count(), ecorePackage.getEInt(), "count", null, 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

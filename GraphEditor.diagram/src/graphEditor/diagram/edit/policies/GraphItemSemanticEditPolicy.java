@@ -17,17 +17,7 @@ public class GraphItemSemanticEditPolicy extends
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2002 == req
-				.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req
-						.setContainmentFeature(graphEditor.GraphEditorPackage.eINSTANCE
-								.getGraph_Nodes());
-			}
-			return getGEFWrapper(new graphEditor.diagram.edit.commands.VariablenodeCreateCommand(
-					req));
-		}
-		if (graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2001 == req
+		if (graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2001 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req
@@ -35,6 +25,16 @@ public class GraphItemSemanticEditPolicy extends
 								.getGraph_Nodes());
 			}
 			return getGEFWrapper(new graphEditor.diagram.edit.commands.FactornodeCreateCommand(
+					req));
+		}
+		if (graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2002 == req
+				.getElementType()) {
+			if (req.getContainmentFeature() == null) {
+				req
+						.setContainmentFeature(graphEditor.GraphEditorPackage.eINSTANCE
+								.getGraph_Nodes());
+			}
+			return getGEFWrapper(new graphEditor.diagram.edit.commands.VariablenodeCreateCommand(
 					req));
 		}
 		return super.getCreateCommand(req);

@@ -81,8 +81,8 @@ public class GraphEditorViewProvider extends AbstractViewProvider {
 					return null; // foreign diagram
 				}
 				switch (visualID) {
-				case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 				case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
+				case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 					if (domainElement == null
 							|| visualID != graphEditor.diagram.part.GraphEditorVisualIDRegistry
 									.getNodeVisualID(containerView,
@@ -90,15 +90,15 @@ public class GraphEditorViewProvider extends AbstractViewProvider {
 						return null; // visual id in semantic hint should match visual id for domain element
 					}
 					break;
-				case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
-					if (graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID != graphEditor.diagram.part.GraphEditorVisualIDRegistry
+				case graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID:
+					if (graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID != graphEditor.diagram.part.GraphEditorVisualIDRegistry
 							.getVisualID(containerView)
 							|| containerView.getElement() != domainElement) {
 						return null; // wrong container
 					}
 					break;
-				case graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID:
-					if (graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID != graphEditor.diagram.part.GraphEditorVisualIDRegistry
+				case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
+					if (graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID != graphEditor.diagram.part.GraphEditorVisualIDRegistry
 							.getVisualID(containerView)
 							|| containerView.getElement() != domainElement) {
 						return null; // wrong container
@@ -129,14 +129,14 @@ public class GraphEditorViewProvider extends AbstractViewProvider {
 			return null;
 		}
 		switch (visualID) {
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
-			return graphEditor.diagram.view.factories.VariablenodeViewFactory.class;
-		case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
-			return graphEditor.diagram.view.factories.FactornodeNameViewFactory.class;
 		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
 			return graphEditor.diagram.view.factories.FactornodeViewFactory.class;
 		case graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID:
 			return graphEditor.diagram.view.factories.VariablenodeNameViewFactory.class;
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
+			return graphEditor.diagram.view.factories.VariablenodeViewFactory.class;
+		case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
+			return graphEditor.diagram.view.factories.FactornodeNameViewFactory.class;
 		case graphEditor.diagram.edit.parts.WrappingLabel3EditPart.VISUAL_ID:
 			return graphEditor.diagram.view.factories.WrappingLabel3ViewFactory.class;
 		}

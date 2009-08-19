@@ -104,4 +104,20 @@ public interface Graph extends EObject {
 	 */
 	EList<Message> getMessages();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true" idRequired="true"
+	 * @generated
+	 */
+	GraphElement getGraphElement(long id);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model nodeRequired="true"
+	 * @generated
+	 */
+	EList<Variablenode> getConnectingVariablenodes(Factornode node);
+
 } // Graph

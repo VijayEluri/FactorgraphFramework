@@ -21,22 +21,22 @@ public class GraphEditorParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser variablenodeName_5001Parser;
+	private IParser factornodeName_5001Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getVariablenodeName_5001Parser() {
-		if (variablenodeName_5001Parser == null) {
-			variablenodeName_5001Parser = createVariablenodeName_5001Parser();
+	private IParser getFactornodeName_5001Parser() {
+		if (factornodeName_5001Parser == null) {
+			factornodeName_5001Parser = createFactornodeName_5001Parser();
 		}
-		return variablenodeName_5001Parser;
+		return factornodeName_5001Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IParser createVariablenodeName_5001Parser() {
+	protected IParser createFactornodeName_5001Parser() {
 		EAttribute[] features = new EAttribute[] { graphEditor.GraphEditorPackage.eINSTANCE
 				.getNode_Name(), };
 		graphEditor.diagram.parsers.MessageFormatParser parser = new graphEditor.diagram.parsers.MessageFormatParser(
@@ -47,22 +47,22 @@ public class GraphEditorParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser factornodeName_5002Parser;
+	private IParser variablenodeName_5002Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getFactornodeName_5002Parser() {
-		if (factornodeName_5002Parser == null) {
-			factornodeName_5002Parser = createFactornodeName_5002Parser();
+	private IParser getVariablenodeName_5002Parser() {
+		if (variablenodeName_5002Parser == null) {
+			variablenodeName_5002Parser = createVariablenodeName_5002Parser();
 		}
-		return factornodeName_5002Parser;
+		return variablenodeName_5002Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IParser createFactornodeName_5002Parser() {
+	protected IParser createVariablenodeName_5002Parser() {
 		EAttribute[] features = new EAttribute[] { graphEditor.GraphEditorPackage.eINSTANCE
 				.getNode_Name(), };
 		graphEditor.diagram.parsers.MessageFormatParser parser = new graphEditor.diagram.parsers.MessageFormatParser(
@@ -101,10 +101,10 @@ public class GraphEditorParserProvider extends AbstractProvider implements
 	 */
 	protected IParser getParser(int visualID) {
 		switch (visualID) {
-		case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
-			return getFactornodeName_5002Parser();
 		case graphEditor.diagram.edit.parts.VariablenodeNameEditPart.VISUAL_ID:
-			return getVariablenodeName_5001Parser();
+			return getFactornodeName_5001Parser();
+		case graphEditor.diagram.edit.parts.FactornodeNameEditPart.VISUAL_ID:
+			return getVariablenodeName_5002Parser();
 		case graphEditor.diagram.edit.parts.WrappingLabel3EditPart.VISUAL_ID:
 			return getMessageCount_6001Parser();
 		}

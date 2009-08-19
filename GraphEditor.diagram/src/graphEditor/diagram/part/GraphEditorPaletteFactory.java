@@ -45,14 +45,14 @@ public class GraphEditorPaletteFactory {
 	private ToolEntry createVariablenode1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
 		types
-				.add(graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2001);
+				.add(graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2002);
 		NodeToolEntry entry = new NodeToolEntry(
 				graphEditor.diagram.part.Messages.Variablenode1CreationTool_title,
 				graphEditor.diagram.part.Messages.Variablenode1CreationTool_desc,
 				types);
 		entry
 				.setSmallIcon(graphEditor.diagram.providers.GraphEditorElementTypes
-						.getImageDescriptor(graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2001));
+						.getImageDescriptor(graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2002));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -63,14 +63,14 @@ public class GraphEditorPaletteFactory {
 	private ToolEntry createFactornode2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
 		types
-				.add(graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2002);
+				.add(graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2001);
 		NodeToolEntry entry = new NodeToolEntry(
 				graphEditor.diagram.part.Messages.Factornode2CreationTool_title,
 				graphEditor.diagram.part.Messages.Factornode2CreationTool_desc,
 				types);
 		entry
 				.setSmallIcon(graphEditor.diagram.providers.GraphEditorElementTypes
-						.getImageDescriptor(graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2002));
+						.getImageDescriptor(graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}

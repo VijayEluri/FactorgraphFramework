@@ -64,8 +64,8 @@ public class GraphCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		int visualID = graphEditor.diagram.part.GraphEditorVisualIDRegistry
 				.getVisualID(view);
 		switch (visualID) {
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID:
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID:
 			if (!semanticChildren.contains(view.getElement())) {
 				return true;
 			}
@@ -216,11 +216,11 @@ public class GraphCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 			}
 			break;
 		}
-		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID: {
+		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result
 						.addAll(graphEditor.diagram.part.GraphEditorDiagramUpdater
-								.getFactornode_2002ContainedLinks(view));
+								.getFactornode_2001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -228,11 +228,11 @@ public class GraphCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 			}
 			break;
 		}
-		case graphEditor.diagram.edit.parts.FactornodeEditPart.VISUAL_ID: {
+		case graphEditor.diagram.edit.parts.VariablenodeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result
 						.addAll(graphEditor.diagram.part.GraphEditorDiagramUpdater
-								.getVariablenode_2001ContainedLinks(view));
+								.getVariablenode_2002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$

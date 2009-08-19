@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class MessageItemProvider
-	extends ItemProviderAdapter
+	extends GraphElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -180,7 +180,7 @@ public class MessageItemProvider
 	@Override
 	public String getText(Object object) {
 		Message message = (Message)object;
-		return getString("_UI_Message_type") + " " + message.getCount();
+		return getString("_UI_Message_type") + " " + message.getId();
 	}
 
 	/**
@@ -213,17 +213,6 @@ public class MessageItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return GraphEditorEditPlugin.INSTANCE;
 	}
 
 }

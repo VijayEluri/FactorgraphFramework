@@ -7,18 +7,24 @@
 package graphEditor.impl;
 
 import graphEditor.Edge;
+import graphEditor.Factornode;
 import graphEditor.Graph;
 import graphEditor.GraphEditorPackage;
+import graphEditor.GraphElement;
 import graphEditor.Message;
 import graphEditor.Node;
 
+import graphEditor.Variablenode;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.UniqueEList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -173,6 +179,53 @@ public class GraphImpl extends EObjectImpl implements Graph {
 			messages = new EObjectContainmentEList<Message>(Message.class, this, GraphEditorPackage.GRAPH__MESSAGES);
 		}
 		return messages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public GraphElement getGraphElement(long id) {
+		if (nodes == null) {
+			nodes = new EObjectContainmentEList<Node>(Node.class, this, GraphEditorPackage.GRAPH__NODES);
+		}
+		if (edges == null) {
+			edges = new EObjectContainmentEList<Edge>(Edge.class, this, GraphEditorPackage.GRAPH__EDGES);
+		}
+		if (messages == null) {
+			messages = new EObjectContainmentEList<Message>(Message.class, this, GraphEditorPackage.GRAPH__MESSAGES);
+		}
+
+		HashMap<Long,GraphElement> map=new HashMap<Long,GraphElement>();
+		for(Node n:nodes)
+			map.put(Long.valueOf(n.getId()), n);
+		for(Edge e:edges)
+			map.put(Long.valueOf(e.getId()), e);
+		for(Message m:messages)
+			map.put(Long.valueOf(m.getId()), m);
+		
+		return map.get(Long.valueOf(id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+
+	 */
+	public EList<Variablenode> getConnectingVariablenodes(Factornode node) {
+		EList<Variablenode> list=new UniqueEList<Variablenode>();
+		if (edges == null) {
+			edges = new EObjectContainmentEList<Edge>(Edge.class, this, GraphEditorPackage.GRAPH__EDGES);
+		}
+		for (Edge e: edges){
+			if(e.getFrom() == node)
+				if (e.getTo() instanceof Variablenode)
+					list.add((Variablenode)e.getTo());
+			if(e.getTo() == node)
+				if (e.getFrom() instanceof Variablenode)
+					list.add((Variablenode)e.getFrom());
+		}
+		return list;
 	}
 
 	/**

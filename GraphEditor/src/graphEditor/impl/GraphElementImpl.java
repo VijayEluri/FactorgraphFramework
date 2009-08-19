@@ -6,9 +6,9 @@
  */
 package graphEditor.impl;
 
-import graphEditor.GraphEditorFactory;
 import graphEditor.GraphEditorPackage;
-import graphEditor.Node;
+import graphEditor.GraphElement;
+import graphEditor.Message;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -19,44 +19,44 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Node</b></em>'.
+ * An implementation of the model object '<em><b>Graph Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link graphEditor.impl.NodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link graphEditor.impl.GraphElementImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class NodeImpl extends GraphElementImpl implements Node {
+public abstract class GraphElementImpl extends EObjectImpl implements GraphElement {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "";
+	protected static final long ID_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected long id = ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NodeImpl() {
+	protected GraphElementImpl() {
 		super();
 	}
 
@@ -67,7 +67,7 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GraphEditorPackage.Literals.NODE;
+		return GraphEditorPackage.Literals.GRAPH_ELEMENT;
 	}
 
 	/**
@@ -75,8 +75,8 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public long getId() {
+		return id;
 	}
 
 	/**
@@ -84,11 +84,11 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphEditorPackage.NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphEditorPackage.GRAPH_ELEMENT__ID, oldId, id));
 	}
 
 	/**
@@ -99,8 +99,8 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GraphEditorPackage.NODE__NAME:
-				return getName();
+			case GraphEditorPackage.GRAPH_ELEMENT__ID:
+				return new Long(getId());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,8 +113,8 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GraphEditorPackage.NODE__NAME:
-				setName((String)newValue);
+			case GraphEditorPackage.GRAPH_ELEMENT__ID:
+				setId(((Long)newValue).longValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +128,8 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GraphEditorPackage.NODE__NAME:
-				setName(NAME_EDEFAULT);
+			case GraphEditorPackage.GRAPH_ELEMENT__ID:
+				setId(ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,10 +143,30 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GraphEditorPackage.NODE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case GraphEditorPackage.GRAPH_ELEMENT__ID:
+				return id != ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * 
+	 */
+	public int compareTo(Object compare) {
+		int c=0;
+		if(compare instanceof GraphElement){
+			GraphElement obj=(GraphElement)compare;
+			
+			if (this.getId() < obj.getId())
+				c= -1;
+			else if (this.getId() == obj.getId())
+				c= 0;
+			else if (this.getId() > obj.getId())
+				c= 1;
+		}
+		return c;
 	}
 
 	/**
@@ -159,10 +179,10 @@ public abstract class NodeImpl extends GraphElementImpl implements Node {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}
 
-} //NodeImpl
+} //GraphElementImpl

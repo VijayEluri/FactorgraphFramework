@@ -117,14 +117,14 @@ public interface GraphEditorPackage extends EPackage {
 	int GRAPH_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link graphEditor.impl.NodeImpl <em>Node</em>}' class.
+	 * The meta object id for the '{@link graphEditor.impl.GraphElementImpl <em>Graph Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see graphEditor.impl.NodeImpl
-	 * @see graphEditor.impl.GraphEditorPackageImpl#getNode()
+	 * @see graphEditor.impl.GraphElementImpl
+	 * @see graphEditor.impl.GraphEditorPackageImpl#getGraphElement()
 	 * @generated
 	 */
-	int NODE = 1;
+	int GRAPH_ELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -133,7 +133,35 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__ID = 0;
+	int GRAPH_ELEMENT__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>Graph Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link graphEditor.impl.NodeImpl <em>Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see graphEditor.impl.NodeImpl
+	 * @see graphEditor.impl.GraphEditorPackageImpl#getNode()
+	 * @generated
+	 */
+	int NODE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__ID = GRAPH_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -142,7 +170,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__NAME = 1;
+	int NODE__NAME = GRAPH_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -151,7 +179,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 2;
+	int NODE_FEATURE_COUNT = GRAPH_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.impl.FactornodeImpl <em>Factornode</em>}' class.
@@ -161,7 +189,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getFactornode()
 	 * @generated
 	 */
-	int FACTORNODE = 2;
+	int FACTORNODE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -216,7 +244,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getVariablenode()
 	 * @generated
 	 */
-	int VARIABLENODE = 3;
+	int VARIABLENODE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -271,7 +299,16 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getMessage()
 	 * @generated
 	 */
-	int MESSAGE = 4;
+	int MESSAGE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__ID = GRAPH_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Count</b></em>' attribute.
@@ -280,7 +317,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__COUNT = 0;
+	int MESSAGE__COUNT = GRAPH_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -289,7 +326,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__FROM = 1;
+	int MESSAGE__FROM = GRAPH_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -298,7 +335,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__TO = 2;
+	int MESSAGE__TO = GRAPH_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -307,7 +344,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE__TYPE = 3;
+	int MESSAGE__TYPE = GRAPH_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Message</em>' class.
@@ -316,7 +353,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FEATURE_COUNT = 4;
+	int MESSAGE_FEATURE_COUNT = GRAPH_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.impl.EdgeImpl <em>Edge</em>}' class.
@@ -326,7 +363,16 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getEdge()
 	 * @generated
 	 */
-	int EDGE = 5;
+	int EDGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__ID = GRAPH_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -335,7 +381,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__FROM = 0;
+	int EDGE__FROM = GRAPH_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -344,7 +390,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__TO = 1;
+	int EDGE__TO = GRAPH_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
@@ -353,7 +399,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = 2;
+	int EDGE_FEATURE_COUNT = GRAPH_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.FunctionType <em>Function Type</em>}' enum.
@@ -363,7 +409,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getFunctionType()
 	 * @generated
 	 */
-	int FUNCTION_TYPE = 6;
+	int FUNCTION_TYPE = 7;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.VariableType <em>Variable Type</em>}' enum.
@@ -373,7 +419,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getVariableType()
 	 * @generated
 	 */
-	int VARIABLE_TYPE = 7;
+	int VARIABLE_TYPE = 8;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.MessageType <em>Message Type</em>}' enum.
@@ -383,7 +429,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getMessageType()
 	 * @generated
 	 */
-	int MESSAGE_TYPE = 8;
+	int MESSAGE_TYPE = 9;
 
 
 	/**
@@ -393,7 +439,7 @@ public interface GraphEditorPackage extends EPackage {
 	 * @see graphEditor.impl.GraphEditorPackageImpl#getTable()
 	 * @generated
 	 */
-	int TABLE = 9;
+	int TABLE = 10;
 
 
 	/**
@@ -451,6 +497,27 @@ public interface GraphEditorPackage extends EPackage {
 	EReference getGraph_Messages();
 
 	/**
+	 * Returns the meta object for class '{@link graphEditor.GraphElement <em>Graph Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Graph Element</em>'.
+	 * @see graphEditor.GraphElement
+	 * @generated
+	 */
+	EClass getGraphElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link graphEditor.GraphElement#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see graphEditor.GraphElement#getId()
+	 * @see #getGraphElement()
+	 * @generated
+	 */
+	EAttribute getGraphElement_Id();
+
+	/**
 	 * Returns the meta object for class '{@link graphEditor.Node <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -459,17 +526,6 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link graphEditor.Node#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see graphEditor.Node#getId()
-	 * @see #getNode()
-	 * @generated
-	 */
-	EAttribute getNode_Id();
 
 	/**
 	 * Returns the meta object for the attribute '{@link graphEditor.Node#getName <em>Name</em>}'.
@@ -737,6 +793,24 @@ public interface GraphEditorPackage extends EPackage {
 		EReference GRAPH__MESSAGES = eINSTANCE.getGraph_Messages();
 
 		/**
+		 * The meta object literal for the '{@link graphEditor.impl.GraphElementImpl <em>Graph Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see graphEditor.impl.GraphElementImpl
+		 * @see graphEditor.impl.GraphEditorPackageImpl#getGraphElement()
+		 * @generated
+		 */
+		EClass GRAPH_ELEMENT = eINSTANCE.getGraphElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAPH_ELEMENT__ID = eINSTANCE.getGraphElement_Id();
+
+		/**
 		 * The meta object literal for the '{@link graphEditor.impl.NodeImpl <em>Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -745,14 +819,6 @@ public interface GraphEditorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NODE = eINSTANCE.getNode();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NODE__ID = eINSTANCE.getNode_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

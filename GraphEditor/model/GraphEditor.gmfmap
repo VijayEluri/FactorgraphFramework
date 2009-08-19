@@ -10,32 +10,9 @@
         href="GraphEditor.ecore#//Graph/nodes"/>
     <ownedChild>
       <domainMetaElement
-          href="GraphEditor.ecore#//Variablenode"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="GraphEditor.gmfgraph#VariablenodeName"/>
-        <features
-            href="GraphEditor.ecore#//Node/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="GraphEditor.gmftool#//@palette/@tools.0/@tools.0"/>
-      <diagramNode
-          href="GraphEditor.gmfgraph#Variablenode"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="GraphEditor.ecore#//Graph/nodes"/>
-    <ownedChild>
-      <domainMetaElement
           href="GraphEditor.ecore#//Factornode"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern=""
-          editorPattern=""
-          editPattern="">
+          xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="GraphEditor.gmfgraph#FactornodeName"/>
         <features
@@ -48,12 +25,33 @@
           href="GraphEditor.gmfgraph#Factornode"/>
     </ownedChild>
   </nodes>
-  <links
-      relatedDiagrams="//@diagram">
+  <nodes>
+    <containmentFeature
+        href="GraphEditor.ecore#//Graph/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="GraphEditor.ecore#//Variablenode"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editorPattern=""
+          editPattern="">
+        <diagramLabel
+            href="GraphEditor.gmfgraph#VariablenodeName"/>
+        <features
+            href="GraphEditor.ecore#//Node/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="GraphEditor.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="GraphEditor.gmfgraph#Variablenode"/>
+    </ownedChild>
+  </nodes>
+  <links>
     <domainMetaElement
         href="GraphEditor.ecore#//Edge"/>
     <containmentFeature
-        href="GraphEditor.ecore#//Graph/connections"/>
+        href="GraphEditor.ecore#//Graph/edges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="GraphEditor.gmftool#//@palette/@tools.0/@tools.3"/>
@@ -61,10 +59,10 @@
         href="GraphEditor.gmfgraph#Edge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="GraphEditor.ecore#//Edge/child"/>
+        href="GraphEditor.ecore#//Edge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="GraphEditor.ecore#//Edge/parent"/>
+        href="GraphEditor.ecore#//Edge/to"/>
     <creationConstraints>
       <sourceEnd
           body="self &lt;> oppositeEnd"/>
@@ -72,13 +70,11 @@
           body="self.oclIsTypeOf(Factornode) &lt;> oppositeEnd.oclIsTypeOf(Factornode) &#xD;&#xA;and&#xD;&#xA;self.oclIsTypeOf(Variablenode) &lt;> oppositeEnd.oclIsTypeOf(Variablenode) &#xD;&#xA;"/>
     </creationConstraints>
   </links>
-  <links
-      relatedDiagrams="//@diagram">
+  <links>
     <domainMetaElement
         href="GraphEditor.ecore#//Message"/>
     <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping"
-        editorPattern="">
+        xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
           href="GraphEditor.gmfgraph#MessageCount"/>
       <features
@@ -93,10 +89,10 @@
         href="GraphEditor.gmfgraph#Message"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="GraphEditor.ecore#//Message/source"/>
+        href="GraphEditor.ecore#//Message/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="GraphEditor.ecore#//Message/target"/>
+        href="GraphEditor.ecore#//Message/to"/>
     <creationConstraints>
       <sourceEnd
           body="self &lt;> oppositeEnd"/>
@@ -135,16 +131,16 @@
         </target>
       </audits>
       <audits
-          name="nodeIdRule"
-          id="nodeIdRuleId"
-          message="Node has no ID">
+          name="graphElementIdRule"
+          id="graphElementIdRuleId"
+          message="Graph Element has no ID">
         <rule
             body="self&lt;>0"/>
         <target
             xsi:type="gmfmap:DomainAttributeTarget"
             nullAsError="true">
           <attribute
-              href="GraphEditor.ecore#//Node/id"/>
+              href="GraphEditor.ecore#//GraphElement/id"/>
         </target>
       </audits>
     </childContainers>

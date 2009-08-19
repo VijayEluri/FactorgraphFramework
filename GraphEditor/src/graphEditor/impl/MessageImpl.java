@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class MessageImpl extends EObjectImpl implements Message, Comparable {
+public class MessageImpl extends GraphElementImpl implements Message {
 	/**
 	 * The default value of the '{@link #getCount() <em>Count</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -231,7 +231,6 @@ public class MessageImpl extends EObjectImpl implements Message, Comparable {
 				c= 0;
 			else if (this.getCount() > obj.getCount())
 				c= 1;
-				
 		}
 		return c;
 	}

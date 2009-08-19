@@ -306,7 +306,7 @@ public class FactornodeNameEditPart extends CompartmentEditPart implements
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
 			IAdaptable hintAdapter = new graphEditor.diagram.providers.GraphEditorParserProvider.HintAdapter(
-					graphEditor.diagram.providers.GraphEditorElementTypes.Factornode_2002,
+					graphEditor.diagram.providers.GraphEditorElementTypes.Variablenode_2002,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

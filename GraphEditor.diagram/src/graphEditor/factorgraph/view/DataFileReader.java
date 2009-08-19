@@ -1,4 +1,4 @@
-package graphEditor.factorgraph;
+package graphEditor.factorgraph.view;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -23,7 +23,6 @@ public class DataFileReader {
 			header = inFile.getCSVHeader(true);
 			int column = header.length;
 			int line = 0;
-			System.out.println("header:" + Arrays.toString(header));
 			List<String> data = null;
 			List<double[]> dataArrays = new ArrayList<double[]>();
 			while ((data = inFile.read()) != null) {
@@ -35,7 +34,7 @@ public class DataFileReader {
 					dataArrays.add(array);
 				} else {
 					throw new Exception("error with line:"
-							+ inFile.getLineNumber());
+							+ inFile.getLineNumber()+"in file:"+file);
 				}
 
 				line++;

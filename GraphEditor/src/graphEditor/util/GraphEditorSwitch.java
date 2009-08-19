@@ -93,9 +93,16 @@ public class GraphEditorSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GraphEditorPackage.GRAPH_ELEMENT: {
+				GraphElement graphElement = (GraphElement)theEObject;
+				T result = caseGraphElement(graphElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GraphEditorPackage.NODE: {
 				Node node = (Node)theEObject;
 				T result = caseNode(node);
+				if (result == null) result = caseGraphElement(node);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -103,6 +110,7 @@ public class GraphEditorSwitch<T> {
 				Factornode factornode = (Factornode)theEObject;
 				T result = caseFactornode(factornode);
 				if (result == null) result = caseNode(factornode);
+				if (result == null) result = caseGraphElement(factornode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,18 +118,21 @@ public class GraphEditorSwitch<T> {
 				Variablenode variablenode = (Variablenode)theEObject;
 				T result = caseVariablenode(variablenode);
 				if (result == null) result = caseNode(variablenode);
+				if (result == null) result = caseGraphElement(variablenode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case GraphEditorPackage.MESSAGE: {
 				Message message = (Message)theEObject;
 				T result = caseMessage(message);
+				if (result == null) result = caseGraphElement(message);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case GraphEditorPackage.EDGE: {
 				Edge edge = (Edge)theEObject;
 				T result = caseEdge(edge);
+				if (result == null) result = caseGraphElement(edge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -141,6 +152,21 @@ public class GraphEditorSwitch<T> {
 	 * @generated
 	 */
 	public T caseGraph(Graph object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Graph Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Graph Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGraphElement(GraphElement object) {
 		return null;
 	}
 
