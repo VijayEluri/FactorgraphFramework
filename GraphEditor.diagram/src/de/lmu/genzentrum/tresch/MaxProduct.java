@@ -6,27 +6,26 @@ import java.util.LinkedList;
 
 
 public class MaxProduct {
-	private LinkedList<Message> mSeq;
-	private Hashtable<Node, Hashtable<Node,Hashtable<Object, Double>>> finalHash; 
+	private Hashtable<Node, Hashtable<Node,Hashtable<Double, Double>>> finalHash; 
 	private Graph graph;
 	private VariableNode root;
-	private Hashtable<Integer, Hashtable<Object, Hashtable< Integer,Object>>> maxHash;
-	private Hashtable<Node, Object> maxVariables;
+	private Hashtable<Integer, Hashtable<Double, Hashtable< Integer,Double>>> maxHash;
+	private Hashtable<Node, Double> maxVariables;
 	
 	public MaxProduct(Graph graph, VariableNode root){
 		this.graph=graph;
-		this.mSeq=graph.getMSeq();
+		//this.mSeq=graph.getMSeq();
 		this.root=root;
 		graph.fillFinalHash();
 		finalHash=graph.getFinalHash();
-		maxHash=new Hashtable<Integer, Hashtable<Object, Hashtable< Integer,Object>>>();
-		maxVariables=new Hashtable<Node, Object>();
+		maxHash=new Hashtable<Integer, Hashtable<Double, Hashtable< Integer,Double>>>();
+		maxVariables=new Hashtable<Node, Double>();
 	}
 	
 	
 	public void doMax() throws NoValueException{
-		for(int k=0; k<getMSeq().size(); k++){
-			if(getMSeq().get(k).isVariableToFactor()){
+		for(int k=0; k<graph.getMSeqHash().size(); k++){
+			if(graph.getMSeqHash().get(k).isVariableToFactor()){
 				calcVariableToFactor(k);				
 			}
 			else{	
@@ -44,7 +43,7 @@ public class MaxProduct {
 		double[] value=new double[root.getValues().length];		//Array, indem in jedem Feld die Summe für einen Def.-Wert steht 
 		double maxresult=Double.NEGATIVE_INFINITY;				//für das maximale Ergebnis wird maxresult zunächst auf minus unendlich gesetzt
 		double minresult=Double.POSITIVE_INFINITY;				//für das minimale Ergebnis wird minresult zunächst auf plus unendlich gesetzt
-		Object def=null;					
+		Double def=null;					
 		
 		for(int j=0; j<root.getValues().length; j++){	
 			for(int i=0; i<neighbours.length; i++){				//Es wird die Summe für jeden Nachbarn eines Def.-Wert gebildet 
@@ -77,9 +76,11 @@ public class MaxProduct {
 	}
 	
 	
-	public void calcMarginals(VariableNode root, FactorNode parent){		
+	public void calcMarginals(VariableNode root, FactorNode parent){	//HIER FEHLER	
 		Node neighbours[]=this.getNeighbours(root);
 		Object def=null;
+		
+		//if(parent!=null) System.out.println("Parent zu beginng der Methode "+parent.getName());
 		
 		for(int i=0; i<neighbours.length; i++){						//für alle ausgehnden Kanten die nicht zum Elternteil führen
 			if(neighbours[i]!=parent){			
@@ -96,36 +97,38 @@ public class MaxProduct {
 				}
 			}
 		}
+		
+	
+		for(int i=0; i<neighbours.length; i++){					//ENDLOS REKURSION!!!
 			
-		for(int i=0; i<neighbours.length; i++){						
-			if(neighbours[i]!=parent){								//für alle Nachbarknoten, die nicht Eltern sind
+			if(neighbours[i]!=parent && finalHash.get(neighbours[i]).keySet().toArray().length!=1){	//für alle Nachbarknoten, die nicht Eltern sind
 				Message m=graph.getMessage(neighbours[i], root);			
 				if(m!=null){										//falls die Message existiert
 					Node nodeArray[]=getFromNodes(m);				//man bekommt alle Nachbarknoten, von den man nicht kommt
 					parent=(FactorNode)neighbours[i];				//Elternteil wird neu gesetzt
-					for(int j=0; j<nodeArray.length; j++){			
+					for(int j=0; j<nodeArray.length; j++){	
 						root=(VariableNode)nodeArray[j];			//für jeden Nachbarknoten(also nur VariablenKnoten) wird dieser als Wurzel gesetzt 
-						//System.out.println(root.getName()+"   "+parent.getName());
+						//System.out.println(root.getName()+" parent "+parent.getName());
 						calcMarginals(root, parent);				//und rekursiv für jeden Wert die belegung der Wurzel berechent	
 					}
 				}
 			}
-			else break;
-		}		
+		}
+			
 	}
 	
 	public void calcVariableToFactor(int index) throws NoValueException{
-		Message m=mSeq.get(index);
+		Message m=graph.getMSeqHash().get(index);
 		VariableNode from=(VariableNode)m.getFrom();				//from und to werden im vorraus aufgerufen, damit diese im Laufe der folgenden Berechnungen 
 		FactorNode to=(FactorNode)m.getTo();						//nicht jedes mal neu aufgerufen werden müssen
-		Hashtable<Node, Hashtable<Object, Double>> toHash=finalHash.get(from);		//toHash wird für das bestimmte from aufgerufen
+		Hashtable<Node, Hashtable<Double, Double>> toHash=finalHash.get(from);		//toHash wird für das bestimmte from aufgerufen
 		
 		if(toHash.size()<=1 && from.isKnown()){						//nur für Kanten die aus Blättern kommen
 			Object toArray[] =toHash.keySet().toArray();
 			for(int i=0; i<toArray.length; i++){
 				FactorNode toNode=(FactorNode)toArray[i];
 				if(toNode==to){
-					Hashtable<Object, Double> valueHash=toHash.get(toNode);
+					Hashtable<Double, Double> valueHash=toHash.get(toNode);
 					valueHash.clear();								//die values mit -1 muessen zunaechst geleert werden
 					VariableNode variable=(VariableNode)m.getFrom();
 					for(int j=0; j<this.graph.getDefSize(m); j++){
@@ -142,14 +145,14 @@ public class MaxProduct {
 		
 		else {														//für inner Kanten
 			Object toArray[] =toHash.keySet().toArray();
-			Hashtable<Object, Double> messageValues[]= getMessageValues(m);
-			Hashtable <Object, Double> resultHash=new Hashtable<Object, Double>();
+			Hashtable<Double, Double> messageValues[]= getMessageValues(m);
+			Hashtable <Double, Double> resultHash=new Hashtable<Double, Double>();
 			
 			for(int i=0; i<toArray.length; i++){			
 				FactorNode toNode=(FactorNode)toArray[i];
 				if(toNode==to){
 					
-					Hashtable<Object, Double> valueHash=toHash.get(toNode);
+					Hashtable<Double, Double> valueHash=toHash.get(toNode);
 					valueHash.clear();								//die values mit -1 muessen zunaechst geleert werden
 				
 					double result=0.0;	
@@ -169,7 +172,7 @@ public class MaxProduct {
 						result=0.0;
 					}
 
-					toHash.put(toNode, new Hashtable<Object, Double>(resultHash));
+					toHash.put(toNode, new Hashtable<Double, Double>(resultHash));
 					resultHash.clear(); 
 				}			
 			}
@@ -177,20 +180,20 @@ public class MaxProduct {
 	}
 	
 	public void calcFactorToVariable(int index) throws NoValueException{
-		Message m=mSeq.get(index);
+		Message m=graph.getMSeqHash().get(index);
 		FactorNode from=(FactorNode)m.getFrom();					//from und to werte werden vorher schon mal definiert
 		VariableNode to=(VariableNode)m.getTo();
-		Object function[][]=from.getFunction();		
-		Hashtable<Node, Hashtable<Object, Double>> toHash=finalHash.get(from);		
-		Hashtable <Object , Hashtable<Integer, Object>>defHash=new Hashtable<Object , Hashtable<Integer, Object>>();
-		Hashtable<Integer, Object> varHash=new Hashtable<Integer, Object>();
+		double function[][]=from.getFunction();		
+		Hashtable<Node, Hashtable<Double, Double>> toHash=finalHash.get(from);		
+		Hashtable <Double , Hashtable<Integer, Double>>defHash=new Hashtable<Double , Hashtable<Integer, Double>>();
+		Hashtable<Integer, Double> varHash=new Hashtable<Integer, Double>();
 					
 		if(toHash.size()<=1){										//nur für Kanten die aus Blättern kommen
 			Object toArray[] =toHash.keySet().toArray();
 			for(int i=0; i<toArray.length; i++){
 				Node toNode=(Node)toArray[i];
 				if(toNode==to){
-					Hashtable<Object, Double> valueHash=toHash.get(toNode);
+					Hashtable<Double, Double> valueHash=toHash.get(toNode);
 					valueHash.clear();								//die values mit -1 muessen zunaechst geleert werden
 					VariableNode variable=(VariableNode)m.getTo();
 					for(int j=0; j<this.graph.getDefSize(m); j++){
@@ -209,7 +212,7 @@ public class MaxProduct {
 				}
 			}	
 			
-			Hashtable <Object, Double> result=new Hashtable<Object, Double>();	//result ist ein neuer hashtable den man komplet in den Hash einsetzen kann
+			Hashtable <Double, Double> result=new Hashtable<Double, Double>();	//result ist ein neuer hashtable den man komplet in den Hash einsetzen kann
 				
 			for(int y=0; y<function[0].length; y++){				//die Tabelle wird zeilen-weise durchlaufen
 				double wert=0;
@@ -234,7 +237,7 @@ public class MaxProduct {
 				if(!result.containsKey(function[i][y])){			//falls für den Funktionswert kein Eintrag existiert
 					res=roundUp(wert);
 					result.put(function[i][y], res);
-					defHash.put(function[i][y], new Hashtable<Integer, Object>(varHash));		//varHash wird DefHash übergeben
+					defHash.put(function[i][y], new Hashtable<Integer, Double>(varHash));		//varHash wird DefHash übergeben
 					varHash.clear();
 				}
 				else{												//falls bereits ein Eintrag für den Funktionswert existiert 
@@ -242,34 +245,37 @@ public class MaxProduct {
 					res=roundUp(res);
 					wert=roundUp(wert);
 					if(res!=wert){									//Wert ist Maximum
-						varHash=new Hashtable<Integer, Object>(defHash.get(function[i][y]));	//varHash wird neu gesetzt 
+						varHash=new Hashtable<Integer, Double>(defHash.get(function[i][y]));	//varHash wird neu gesetzt 
 						defHash.remove(function[i][y]);											//alter defHash für den Funktionswert wird entfernt
-						defHash.put(function[i][y], new Hashtable<Integer, Object>(varHash));	//defHash bekommt für den Funktionswert den neuen varHash
+						defHash.put(function[i][y], new Hashtable<Integer, Double>(varHash));	//defHash bekommt für den Funktionswert den neuen varHash
 						varHash.clear();														//varHash wird geleert, damit er neu gesetzt werden kann
 					}
 					else{												
 						defHash.remove(function[i][y]);											//varHash muss nicht verändert werden
-						defHash.put(function[i][y], new Hashtable<Integer, Object>(varHash));	//defHasht bekommt varHash für den Funtkionswert
+						defHash.put(function[i][y], new Hashtable<Integer, Double>(varHash));	//defHasht bekommt varHash für den Funtkionswert
 						varHash.clear();
 					}
 					result.remove(function[i][y]);					//ResultHash bekommt das Maximum (res) als Value übergeben
 					result.put(function[i][y], res);				//um anschließend in FinalHash eingetragen zu werden
 				}	
 			}
-			this.maxHash.put(index, new Hashtable<Object , Hashtable<Integer, Object>>(defHash));
+			this.maxHash.put(index, new Hashtable<Double , Hashtable<Integer, Double>>(defHash));
 			defHash.clear();
 			finalHash.get(from).get(to).clear();								//alte Werte aus dem Value-Hash werden entfernt (-1) 
-			finalHash.get(from).put(to,new Hashtable<Object, Double>(result));	//result wird als neuer Value-Hash hinzugefügt
+			finalHash.get(from).put(to,new Hashtable<Double, Double>(result));	//result wird als neuer Value-Hash hinzugefügt
 		}
 	}
 	
+	/*
+	 * Hilfsfunktionen
+	 */
 	
-	public Hashtable<Object, Double>[] getMessageValues (Message m){	//gibt Array zurück, der die einzelnen DefHash enthält
+	public Hashtable<Double, Double>[] getMessageValues (Message m){	//gibt Array zurück, der die einzelnen DefHash enthält
 		Node from=m.getFrom();
 		Node to=m.getTo();
 		Node neighbours[]=getNeighbours(from);
 		int neighLength=neighbours.length;
-		Hashtable<Object, Double>[] resultArray=new Hashtable[neighLength-1];
+		Hashtable<Double, Double>[] resultArray=new Hashtable[neighLength-1];
 		
 		int k=0;
 		for(int i=0; i<neighLength; i++){
@@ -312,9 +318,9 @@ public class MaxProduct {
 	}
 	
 	public Node getNode(int id){ 									//gibt Knoten zurück, wenn man nur die id weiß
-		for(int i=0; i<mSeq.size(); i++){
-			Node from=mSeq.get(i).getFrom(); 
-			Node to=mSeq.get(i).getTo(); 
+		for(int i=0; i<graph.getMSeqHash().size(); i++){
+			Node from=graph.getMSeqHash().get(i).getFrom(); 
+			Node to=graph.getMSeqHash().get(i).getTo(); 
 			if(from.getId()==id ){
 				return from;
 			}
@@ -334,20 +340,17 @@ public class MaxProduct {
 	
 	
 
-	public LinkedList<Message> getMSeq() {
-		return mSeq;
-	}
+	/*
+	 * Getters und Setters folgen
+	 */
+	
 
-	public void setMSeq(LinkedList<Message> seq) {
-		mSeq = seq;
-	}
-
-	public Hashtable<Node, Hashtable<Node, Hashtable<Object, Double>>> getFinalHash() {
+	public Hashtable<Node, Hashtable<Node, Hashtable<Double, Double>>> getFinalHash() {
 		return finalHash;
 	}
 
 	public void setFinalHash(
-			Hashtable<Node, Hashtable<Node, Hashtable<Object, Double>>> finalHash) {
+		Hashtable<Node, Hashtable<Node, Hashtable<Double, Double>>> finalHash) {
 		this.finalHash = finalHash;
 	}
 

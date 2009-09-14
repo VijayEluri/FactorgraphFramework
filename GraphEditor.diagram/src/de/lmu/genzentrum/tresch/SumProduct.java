@@ -1,335 +1,399 @@
 package de.lmu.genzentrum.tresch;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.Set;
 
+import org.apache.commons.collections.MapUtils;
 
-public class SumProduct{
-	private LinkedList<Message> mSeq;
-	private Hashtable<Node, Hashtable<Node,Hashtable<Object, Double>>> finalHash; 
+public class SumProduct {
+	private Hashtable<Node, Hashtable<Node, Hashtable<Double, Double>>> finalHash;
 	private Graph graph;
-	private Hashtable <Node ,Hashtable<Object, Double>> marginalHash;
-	
-	//SumProduct bekommt das Objekt Graph übergeben
-	public SumProduct(Graph graph){
-		this.graph=graph;
-		this.mSeq=graph.getMSeq();
-		graph.fillFinalHash();
-		finalHash=graph.getFinalHash();
-		marginalHash=new Hashtable<Node ,Hashtable<Object, Double>>();
+	private Hashtable<Node, Hashtable<Double, Double>> marginalHash;
+
+	// SumProduct bekommt das Objekt Graph übergeben
+	public SumProduct(Graph graph) {
+//		System.out.println("SumProduct");
+		this.graph = graph;
+		//graph.fillFinalHash();
+		finalHash = graph.getFinalHash();
+//		System.out.println("graph:");
+//		graph.printout();
+	//	MapUtils.debugPrint(System.out, "finalHash", finalHash);
+		marginalHash = new Hashtable<Node, Hashtable<Double, Double>>();
 	}
-	
-	
+
 	/*
-	 * DoSum-Algorithmus der für die jeweiligen Messages den Value berechnet
-	 * und anschließend dieRandverteilungen berechnet		
+	 * DoSum-Algorithmus der für die jeweiligen Messages den Value berechnet und
+	 * anschließend dieRandverteilungen berechnet
 	 */
-	public Hashtable<Node ,Hashtable<Object, Double>> doSum() throws NoValueException{	
-		for(int i=0; i<getMSeq().size(); i++){
-			if(getMSeq().get(i).isVariableToFactor()){
-				try{
-				calcVariableToFactor(i);
-				}catch (NoValueException e){
-					System.out.println(e.getMessage());
+	public Hashtable<Node, Hashtable<Double, Double>> doSum()
+			throws NoValueException {
+		for (int i = 0; i < graph.getMSeqHash().size(); i++) {
+			if (graph.getMSeqHash().get(i).isVariableToFactor()) {
+				try {
+					calcVariableToFactor(i);
+				} catch (NoValueException e) {
+//					System.out.println(e.getMessage());
 				}
-			}
-			else{
-				try{
+			} else {
+				try {
 					calcFactorToVariable(i);
-				}catch (NoValueException e){
-					System.out.println(e.getMessage());
-				}			
+				} catch (NoValueException e) {
+//					System.out.println(e.getMessage());
+				}
 			}
 		}
 		calcMarginals();
+//		graph.printout();
+//		MapUtils.debugPrint(System.out, "Ende marginalHash", marginalHash);
 		return marginalHash;
 	}
 
-	
 	/*
-	 *	Methode berechnet die Values für die Messages die von einem Variablen-Knoten
-	 * 	zu einem Faktor-Knoten laufen 
+	 * Methode berechnet die Values für die Messages die von einem
+	 * Variablen-Knoten zu einem Faktor-Knoten laufen
+	 *                      ->
+	 *    x mal f ->  (v ) ----- [f]
+	 * 
 	 */
-	public void calcVariableToFactor(int index) throws NoValueException{
-		Message m=mSeq.get(index);
-		VariableNode from=(VariableNode)m.getFrom();		//from und to werden im vorraus aufgerufen, damit diese im Laufe der folgenden Berechnungen 
-		FactorNode to=(FactorNode)m.getTo();				//nicht jedes mal neu aufgerufen werden müssen
-		Hashtable<Node, Hashtable<Object, Double>> toHash=finalHash.get(from);		//toHash wird für das bestimmte from aufgerufen
+	
+	/* 
+	 finalHash = 
+	{
+	    {tresch.FactorNode: name:fA id:1 nodeArray:null function:([0.0, 1.0][0.4, 0.6])} = 
+	    {
+	        {tresch.VariableNode: name:x1 id:2 known:true values: 0.0 1.0} = 
+	        {
+	            0.0 = NaN java.lang.Double
+	            1.0 = NaN java.lang.Double
+	        } java.util.Hashtable
+	    } java.util.Hashtable
+	    {tresch.VariableNode: name:x1 id:2 known:true values: 0.0 1.0} = 
+	    {
+	        {tresch.FactorNode: name:fA id:1 nodeArray:null function:([0.0, 1.0][0.4, 0.6])} = 
+	        {
+	            0.0 = NaN java.lang.Double
+	            1.0 = NaN java.lang.Double
+	        } java.util.Hashtable
+	    } java.util.Hashtable
+	} java.util.Hashtable	
+	*/
+	public void calcVariableToFactor(int index) throws NoValueException {
+//		System.out.println("v2f");
 		
-		if(toHash.size()<=1 && from.isKnown()){	//nur für Kanten die aus Blättern kommen
-			Object toArray[] =toHash.keySet().toArray();
-			for(int i=0; i<toArray.length; i++){
-				FactorNode toNode=(FactorNode)toArray[i];
-				if(toNode==to){
-					Hashtable<Object, Double> valueHash=toHash.get(toNode);
-					valueHash.clear();			//die values mit -1 muessen zunaechst geleert werden
-					VariableNode variable=(VariableNode)m.getFrom();
-					for(int j=0; j<this.graph.getDefSize(m); j++){
-						toHash.get(toNode).put(variable.getValues()[j], 1.0);	//man fügt zum valueHash für jedes Def 1 hinzu;
-					}									
-				}		
-			}	
+		Message m = graph.getMSeqHash().get(index);
+//		System.out.println(m);
+//		msg: {tresch.VariableNode: name:x1 id:2 known:true values: 0.0 1.0} -> {tresch.FactorNode: name:fA id:1 nodeArray:null function:([0.0, 1.0][0.4, 0.6])} vtf:true isMarginalEdge:false value:[NaN, NaN] de.lmu.genzentrum.tresch.Message
+		VariableNode from = (VariableNode) m.getFrom(); 
+		FactorNode to = (FactorNode) m.getTo(); 
+		Hashtable<Node, Hashtable<Double, Double>> toHash = finalHash.get(from); 
+	/*	
+   {tresch.FactorNode: name:fA id:1 nodeArray:null function:([0.0, 1.0][0.4, 0.6])} = 
+    {
+        0.0 = NaN java.lang.Double
+        1.0 = NaN java.lang.Double
+    } java.util.Hashtable
+*/
+		
+//		MapUtils.debugPrint(System.out, "1toHash", toHash);
+		if (toHash.size() <= 1 && from.isKnown()) { // nur für Kanten die aus  Blättern kommen
+//			System.out.println("v2f blätter");
+			Object toArray[] = toHash.keySet().toArray();
+			for (int i = 0; i < toArray.length; i++) {
+				FactorNode toNode = (FactorNode) toArray[i];
+				if (toNode == to) {
+					Hashtable<Double, Double> valueHash = toHash.get(toNode);
+					valueHash.clear(); 	// die values mit NaN muessen zunaechst geleert werden
+//					MapUtils.debugPrint(System.out, "2valueHash", valueHash);
+
+					for (int j = 0; j < this.graph.getDefSize(m); j++) {
+						valueHash.put(from.getValues()[j], 1.0); // man fügt zum valueHash für jedes Def 1 hinzu;
+					}	
+					toHash.put(toNode, valueHash);
+//					MapUtils.debugPrint(System.out, "3valueHash", valueHash);
+				}
+			}
+//			MapUtils.debugPrint(System.out, "4toHash", toHash);
 		}
-		
 		else if(toHash.size()<=1 && !from.isKnown()){
-			throw new NoValueException("Variablen-Knoten sit nicht bekannt");
+		    throw new NoValueException("Variablen-Knoten sit nicht bekannt");
 		}
-		
-		else {	//für inner Kanten
-			Object toArray[] =toHash.keySet().toArray();
-			Hashtable<Object, Double> messageValues[]= getMessageValues(m);
-			Hashtable <Object, Double> resultHash=new Hashtable<Object, Double>();
-			
-			for(int i=0; i<toArray.length; i++){			
-				FactorNode toNode=(FactorNode)toArray[i];
-				if(toNode==to){
-					
-					Hashtable<Object, Double> valueHash=toHash.get(toNode);
-					valueHash.clear();			//die values mit -1 muessen zunaechst geleert werden
-				
-					double result=1.0;	
-					for(int j=0; j<graph.getDefSize(m);j++){
-					
-						for(int x=0; x<messageValues.length; x++){
-							Object def=from.getValues()[j];
-							if(!Double.isNaN(messageValues[x].get(def)) ){
-								result=result*messageValues[x].get(def);			//Def als Key
-							}
-							else if(Double.isNaN(messageValues[x].get(def))){
-								throw new NoValueException("Kann nicht berechnet werden") ;
+	
+		else { // für inner Kanten
+//			System.out.println("innen");
+			Object toArray[] = toHash.keySet().toArray();
+			Hashtable<Double, Double> messageValues[] = getMessageValues(m);
+			Hashtable<Double, Double> resultHash = new Hashtable<Double, Double>();
+
+			for (int i = 0; i < toArray.length; i++) {
+				FactorNode toNode = (FactorNode) toArray[i];
+				if (toNode == to) {
+
+					Hashtable<Double, Double> valueHash = toHash.get(toNode);
+					valueHash.clear(); // die values mit NaN muessen zunaechst
+					// geleert werden
+
+					double result = 1.0;
+					for (int j = 0; j < graph.getDefSize(m); j++) {
+
+						for (int x = 0; x < messageValues.length; x++) {
+							Double def = from.getValues()[j];
+							if (!Double.isNaN(messageValues[x].get(def))) {
+								result = result * messageValues[x].get(def); // Def
+								// als
+								// Key
+							} else if (Double.isNaN(messageValues[x].get(def))) {
+								throw new NoValueException(
+										"Kann nicht berechnet werden");
 							}
 						}
-						result=roundUp(result);
-					
+						result = roundUp(result);
+
 						resultHash.put(from.getValues()[j], result);
-						//toHash.get(toNode).put(from.getValues()[j], result);	//neu berechnete Values werden in finalHash hinzugefügt
-						result=1.0;
+						// toHash.get(toNode).put(from.getValues()[j], result);
+						// //neu berechnete Values werden in finalHash
+						// hinzugefügt
+						result = 1.0;
 					}
-					resultHash=this.normalize(resultHash);
-					toHash.put(toNode, new Hashtable<Object, Double>(resultHash));
-					resultHash.clear(); 
-				}			
+					resultHash = this.normalize(resultHash);
+					toHash.put(toNode,
+							new Hashtable<Double, Double>(resultHash));
+					resultHash.clear();
+				}
 			}
-		}	
-	}
-	
-	/*
-	 * Methode berechnet den Value der Messages die von Faktor-Knoten 
-	 * zu Variablen-Knoten geht	
-	 */
-	public void calcFactorToVariable(int index) throws NoValueException{
-		Message m=mSeq.get(index);
-		FactorNode from=(FactorNode)m.getFrom();	//from und to werte werden vorher schon mal definiert
-		VariableNode to=(VariableNode)m.getTo();
-		Object function[][]=from.getFunction();		
-		Hashtable<Node, Hashtable<Object, Double>> toHash=finalHash.get(from);		
-		
-		if(toHash.size()<=1){	//nur für Kanten die aus Blättern kommen
-			Object toArray[] =toHash.keySet().toArray();
-			for(int i=0; i<toArray.length; i++){
-				Node toNode=(Node)toArray[i];
-				if(toNode==to){
-					Hashtable<Object, Double> valueHash=toHash.get(toNode);
-					valueHash.clear();			//die values mit -1 muessen zunaechst geleert werden
-					VariableNode variable=(VariableNode)m.getTo();
-					for(int j=0; j<this.graph.getDefSize(m); j++){
-						toHash.get(toNode).put(variable.getValues()[j], (Double)function[1][j]);	//man fügt zum valueHash für jedes Def die Funktionswerte hinzu;
-					}									
-				}		
-			}	
 		}
-		else{	//nur für inner Kanten
-			int i=0;
-			int idArray[]=from.getNodeArray();
-			//im nameArray stehen die Namen in der richtigen Reihenfolge drin Bsp(x1, x2, x3) 
+	}
+
+	/*
+	 * Methode berechnet den Value der Messages die von Faktor-Knoten zu
+	 * Variablen-Knoten geht
+	 *  *                  ->
+	 *    x mal v ->  [f] ----- (v)
+	 * 
+	 */
+	public void calcFactorToVariable(int index) throws NoValueException {
+//		System.out.println("f2v");
+		Message m = graph.getMSeqHash().get(index);
+//		System.out.println(m);
+		FactorNode from = (FactorNode) m.getFrom(); 
+		VariableNode to = (VariableNode) m.getTo();
+//		System.out.println("from: "+from);
+//		System.out.println("to: "+to);
+		double function[][] = from.getFunction();
+		
+//		for(int i=0;i<function.length;i++)
+//			System.out.println(Arrays.toString(function[i]));
+		
+		Hashtable<Node, Hashtable<Double, Double>> toHash = finalHash.get(from);
+
+//		MapUtils.debugPrint(System.out, "1toHash", toHash);
+
+		if (toHash.size() <= 1) { // nur für Kanten die aus Blättern kommen
+//			System.out.println("Blätter");
+			Object toArray[] = toHash.keySet().toArray();
+			for (int i = 0; i < toArray.length; i++) {
+				Node toNode = (Node) toArray[i];
+				if (toNode.equals(to)) {
+					Hashtable<Double, Double> valueHash = toHash.get(toNode);
+//					MapUtils.debugPrint(System.out, "2valueHash", valueHash);
+					valueHash.clear(); // die values mit NaN muessen zunaechst geleert werden
+//					MapUtils.debugPrint(System.out, "3valueHash", valueHash);
+
+					for (int j = 0; j < this.graph.getDefSize(m); j++) {
+//						System.out.println(to.getValues()[j]+","+(Double) function[1][j]);
+						valueHash.put(to.getValues()[j],(Double) function[1][j]); // man fügt zum valueHash für jedes Def die Funktionswerte hinzu;
+					}
+					toHash.put(toNode,valueHash);
+				}
+			}
 			
-			for(int j=0; j<idArray.length; j++){ 
-				if(from.getNodeArray()[j]==to.getId()){
-					i=j;	//i gibt die Spalte an, die genauer betrachtet
+//			MapUtils.debugPrint(System.out, "4toHash", toHash);
+//			MapUtils.debugPrint(System.out, "5finalHash", finalHash);
+
+		} else { // nur für inner Kanten
+//			System.out.println("innen");
+			int i = 0; // Spalte
+			int idArray[] = from.getNodeArray();
+			// im idArray stehen die id in der richtigen Reihenfolge drin Bsp(x1, x2, x3)
+
+			for (int j = 0; j < idArray.length; j++) {
+				if (from.getNodeArray()[j] == to.getId()) {
+					i = j; // i gibt die Spalte an, die genauer betrachtet
 				}
-			}			
-			Hashtable <Object, Double> result=new Hashtable<Object, Double>();	//result ist ein neuer hashtable den man komplet in den Hash einsetzen kann
-				
-			for(int y=0; y<function[0].length; y++){	//die Tabelle wird zeilen-weise durchlaufen
-				double wert=1;
-				for(int x=0; x<function.length; x++){	
-					if(x<=function.length-2 && x!=i){	//man multipliziert die Values der eingehenden Messages	
-						double value=this.getValue(this.getNode(idArray[x]), from, function[x][y]);
-							if(!Double.isNaN(value)){
-								wert=wert*value;			
-							}
-							else if(Double.isNaN(value)){
-								throw new NoValueException("Kann nicht berechnet werden, da der Value einer eingehenden Message fehlt!");
-							}
-						
-					}
-					else if(x==function.length-1){	//der Funktionswert für die bestimmten werte wird dazu multipliziert
-						wert=wert*(Double)function[x][y];
+			}
+			Hashtable<Double, Double> result = new Hashtable<Double, Double>(); // result ist ein neuer hashtable den man komplet in den Hash einsetzen kann
+
+			for (int y = 0; y < function[0].length; y++) { // die Tabelle wird zeilen-weise durchlaufen
+				double wert = 1;
+				for (int x = 0; x < function.length; x++) {
+					if (x <= function.length - 2 && x != i) { // man multipliziert die Values der eingehenden Messages
+						double value = this.getValue(this.getNode(idArray[x]),
+								from, function[x][y]);
+						if (!Double.isNaN(value)) {
+							wert = wert * value;
+						} else if (Double.isNaN(value)) {
+							throw new NoValueException(
+									"Kann nicht berechnet werden, da der Value einer eingehenden Message fehlt!");
+						}
+					} else if (x == function.length - 1) { // der Funktionswert für die bestimmten werte wird dazu multipliziert
+						wert = wert * (Double) function[x][y];
 					}
 				}
-				
-				double res=0;
-				if(!result.containsKey(function[i][y])){	//falls für den Funktionswert bereits ein Eintrag existiet
-					res=wert;
-					res=roundUp(res);
+
+				double res = 0;
+				if (!result.containsKey(function[i][y])) { // falls für den Funktionswert bereits ein Eintrag existiet
+					res = wert;
+					res = roundUp(res);
 					result.put(function[i][y], res);
-				}
-				else{	//falls noch kein funktionswert exitiert
-					res=result.get(function[i][y])+wert;
-					res=roundUp(res);
+				} else { // falls noch kein funktionswert exitiert
+					res = result.get(function[i][y]) + wert;
+					res = roundUp(res);
 					result.remove(function[i][y]);
 					result.put(function[i][y], res);
 				}
 			}
-			result=this.normalize(result);
-			finalHash.get(from).get(to).clear();	//alte Werte aus dem Value-Hash werden entfernt (-1) 
-			finalHash.get(from).put(to,new Hashtable<Object, Double>(result));	//result wird als neuer Value-Hash hinzugefügt
+			result = this.normalize(result);
+//			MapUtils.debugPrint(System.out, "result", result);
+			finalHash.get(from).get(to).clear(); // alte Werte aus dem Value-Hash werden entfernt (-1)
+		
+			finalHash.get(from).put(to, new Hashtable<Double, Double>(result)); // result wird als neuer Value-Hash hinzugefügt
 		}
 	}
-	
-	
+
 	/*
-	 * Methode berechnet die Werte der einzelnen Variablen-Knoten (Randverteilungen)
+	 * Methode berechnet die Werte der einzelnen Variablen-Knoten
+	 * (Randverteilungen)
 	 */
-	public void calcMarginals(){
-		Hashtable<Object, Double> resultHash=new Hashtable<Object, Double>();
-		
-		Object finalArray[]=finalHash.keySet().toArray();
-		for(int i=0; i<finalArray.length; i++){
-			if(finalArray[i].getClass().getName().equals("VariableNode")){	//man sucht im fromHash die einzelnen VariablenKnoten
-				Message m=mSeq.get(i);
-				VariableNode node=(VariableNode)finalArray[i];
-				
-				double wert[]=new double[getGraph().getDefSize(m)];	//man braucht soviele Werte wie die Definitionsgröße
-				for(int t=0; t<wert.length; t++){
-					wert[t]=1;	//man muss das wert-array mit dem neutralen Element der Multiplikation füllen
-				}
-				
-				for(int t=0; t<wert.length; t++){	
-					Object def=node.getValues()[t];	//man braucht den definitionswert für den eine berechnung stattfindet
-					Object fromArray[]=finalHash.keySet().toArray();
-					for(int j=0; j<fromArray.length; j++){	
-						Node from=(Node)fromArray[j];
-						Object toArray[]=finalHash.get(from).keySet().toArray();
-						for(int k=0; k<toArray.length; k++){
-							Node to=(Node)toArray[k];
-							if(to.equals(node)){
-								double value=(double)(finalHash.get(from).get(to).get(def));	
-								wert[t]=wert[t]*value;		//wert wird berechnet in dem man alle eingehenden kannten für einen defwert multipliziert				
+	public void calcMarginals() {
+//		System.out.println("calcMarginals");
+		Hashtable<Double, Double> resultHash = new Hashtable<Double, Double>();
+//		MapUtils.debugPrint(System.out, "1finalHash", finalHash);
+		Object finalArray[] = finalHash.keySet().toArray();
+
+		for (int i = 0; i < finalArray.length; i++) {
+			if (finalArray[i] instanceof VariableNode) { // margins werden nur über variablenode berechnet
+				Message m = graph.getMSeqHash().get(i);
+				VariableNode node = (VariableNode) finalArray[i];
+//				System.out.println(m);
+//				System.out.println(node);
+				double wert[] = new double[graph.getDefSize(m)]; // man braucht soviele Werte wie die Definitionsgröße
+//				System.out.println("1!"+Arrays.toString(wert));
+				Arrays.fill(wert, 1);
+//				System.out.println("2!"+Arrays.toString(wert));
+				for (int t = 0; t < wert.length; t++) {
+//					System.out.println("t:"+t);
+					Double def = node.getValues()[t]; // man braucht den definitionswert für den eine berechnung stattfindet
+//					System.out.println("def:"+def);
+					Object fromArray[] = finalHash.keySet().toArray();
+					
+					for (int j = 0; j < fromArray.length; j++) {
+//						System.out.println("j"+j);
+						Node from = (Node) fromArray[j];
+//						System.out.println(from);
+						Object toArray[] = finalHash.get(from).keySet()
+								.toArray();
+//						System.out.println("toa:"+toArray.length);
+						for (int k = 0; k < toArray.length; k++) {
+							Node to = (Node) toArray[k];
+//							System.out.println(to);
+//							System.out.println(to.equals(node));
+//							System.out.println(to == node);
+//							System.out.println(to.getName());
+//							System.out.println(node.getName());
+							if (to.equals(node)) { ////TODO  hier ist irgend was faul!!!! in meinem beispiel sind die knoten nie gleich?!?!
+								double value = (double) (finalHash.get(from).get(to).get(def));
+//								System.out.println("wert="+wert[t]+"*"+value);
+								wert[t] = wert[t] * value; 
+								// wert wird berechnet in dem man alle eingehenden kannten für einen defwert multipliziert
 							}
 						}
 					}
-					wert[t]=roundUp(wert[t]);
-					resultHash.put(def, wert[t]);	//Wert wird in einem HilfsHash gespeichert 
+//					System.out.println("wert:"+wert[t]);
+					wert[t] = roundUp(wert[t]);
+//					System.out.println("roundedwert:"+wert[t]);
+					resultHash.put(def, wert[t]); // Wert wird in einem HilfsHash gespeichert
 				}
-				resultHash=this.normalize(resultHash);		//der HilfsHash resultHash wird zunächst normaliziert
-				
-				//nur für die Ausgabe:
-				Object keyArray[]=resultHash.keySet().toArray();
-				for(int k=0; k<keyArray.length; k++){
-					System.out.println("Knoten "+node.getName()+" Def: "+keyArray[k]+ " hat den Wert "+resultHash.get(keyArray[k]));
+//				System.out.println("3!"+Arrays.toString(wert));
+//				MapUtils.debugPrint(System.out, "2resultHash", resultHash);
+				resultHash = this.normalize(resultHash); // der HilfsHash resultHash wird zunächst normaliziert nur für die Ausgabe:
+//				MapUtils.debugPrint(System.out, "3resultHash", resultHash);
+
+				Object keyArray[] = resultHash.keySet().toArray();
+
+				for (int k = 0; k < keyArray.length; k++) {
+					System.out.println("Knoten " + node.getName() + " Def: "+ keyArray[k] + " hat den Wert "+ resultHash.get(keyArray[k]));
 				}
 				marginalHash.put(node, resultHash);
 			}
-			
 		}
 	}
-	
+
 	/*
 	 * Hilfsfunktionen:
 	 */
-	public Hashtable <Object, Double> normalize(Hashtable <Object, Double> result){
-		double sum=0;
-		Hashtable <Object, Double> resultNormalized=new Hashtable<Object, Double>();
-		Object resultArray []=result.keySet().toArray();
-		for(int i=0; i<resultArray.length; i++){
-			sum=sum+result.get(resultArray[i]);
+	public Hashtable<Double, Double> normalize(Hashtable<Double, Double> result) {// Methode die Werte normalisiert
+		double sum = 0;
+		Hashtable<Double, Double> resultNormalized = new Hashtable<Double, Double>();
+		Object resultArray[] = result.keySet().toArray();
+		for (int i = 0; i < resultArray.length; i++) {
+			sum = sum + result.get(resultArray[i]);
 		}
-		for(int i=0; i<resultArray.length; i++){
-			resultNormalized.put(resultArray[i], roundUp(result.get(resultArray[i])/sum));
+		for (int i = 0; i < resultArray.length; i++) {
+			resultNormalized.put((Double) resultArray[i], roundUp(result.get(resultArray[i])/ sum));
 		}
 		return resultNormalized;
 	}
-	
-	public Hashtable<Object, Double>[] getMessageValues (Message m){	//gibt Array zurück, der die einzelnen DefHash enthält
-		Node from=m.getFrom();
-		Node to=m.getTo();
-		Node neighbours[]=getNeighbours(from);
-		int neighLength=neighbours.length;
-		Hashtable<Object, Double>[] resultArray=new Hashtable[neighLength-1];
-		
-		int k=0;
-		for(int i=0; i<neighLength; i++){
-			if(neighbours[i]!=to){
-				resultArray[k]=finalHash.get(neighbours[i]).get(from);;
+
+	public Hashtable<Double, Double>[] getMessageValues(Message m) {// gibt Array zurück, der die einzelnen DefHash enthält
+		Node from = m.getFrom();
+		Node to = m.getTo();
+		Node neighbours[] = getNeighbours(from);
+		int neighLength = neighbours.length;
+		Hashtable<Double, Double>[] resultArray = new Hashtable[neighLength - 1];
+
+		int k = 0;
+		for (int i = 0; i < neighLength; i++) {
+			if (neighbours[i] != to) {
+				resultArray[k] = finalHash.get(neighbours[i]).get(from);
+				;
 				k++;
 			}
-		}	
-		return resultArray;		
+		}
+		return resultArray;
 	}
-		
-	public Node[] getNeighbours(Node node){							//gibt alle Nachbarknoten zurück
-		Object keyArray[]=finalHash.get(node).keySet().toArray();
-		Node nodeArray[]=new Node[keyArray.length];
-		for(int i=0; i<keyArray.length; i++){
-			nodeArray[i]=(Node)keyArray[i];
+
+	public Node[] getNeighbours(Node node) {// gibt alle Nachbarknoten zurück
+		Object keyArray[] = finalHash.get(node).keySet().toArray();
+		Node nodeArray[] = new Node[keyArray.length];
+		for (int i = 0; i < keyArray.length; i++) {
+			nodeArray[i] = (Node) keyArray[i];
 		}
 		return nodeArray;
 	}
-	
-	
-	public Node getNode(int id){	//gibt den Node einer Message zurück, wenn man nur die Id des FromNodes hat 
-		Object[] fromKey=finalHash.keySet().toArray();
-		for(int i=0; i<fromKey.length; i++){
-			Node fromNode=(Node)fromKey[i];
-			if(fromNode.getId()==id){
+
+	public Node getNode(int id) {// gibt den Node einer Message zurück, wenn man
+		// nur die Id des FromNodes hat
+		Object[] fromKey = finalHash.keySet().toArray();
+		for (int i = 0; i < fromKey.length; i++) {
+			Node fromNode = (Node) fromKey[i];
+			if (fromNode.getId() == id) {
 				return fromNode;
 			}
 		}
 		return null;
 	}
-	
-	public double getValue(Node from, Node to, Object def){
-		double value=finalHash.get(from).get(to).get(def);
+
+	public double getValue(Node from, Node to, Object def) {
+		double value = finalHash.get(from).get(to).get(def);
 		return value;
 	}
-	
-	public double roundUp(double value){
-		BigDecimal bd=new BigDecimal(value); 
-		BigDecimal rn=bd.setScale(10, java.math.BigDecimal.ROUND_HALF_UP);
+
+	public double roundUp(double value) {
+		BigDecimal bd = new BigDecimal(value);
+		BigDecimal rn = bd.setScale(10, java.math.BigDecimal.ROUND_HALF_UP);
 		return rn.doubleValue();
 	}
-	
-	
-	/*
-	 * Getters & Setters:
-	 */
-	
-	public Graph getGraph() {
-		return graph;
-	}
-
-	public void setGraph(Graph graph) {
-		this.graph = graph;
-	}
-
-	public Hashtable<Node, Hashtable<Node, Hashtable<Object, Double>>> getFinalHash() {
-		return finalHash;
-	}
-
-	public void setFinalHash(
-			Hashtable<Node, Hashtable<Node, Hashtable<Object, Double>>> finalHash) {
-		this.finalHash = finalHash;
-	}
-
-	public LinkedList<Message> getMSeq() {
-		return mSeq;
-	}
-
-	public void setMSeq(LinkedList<Message> seq) {
-		mSeq = seq;
-	}
-	
-	
 }
