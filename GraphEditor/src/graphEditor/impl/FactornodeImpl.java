@@ -11,6 +11,7 @@ import graphEditor.FunctionType;
 import graphEditor.GraphEditorFactory;
 import graphEditor.GraphEditorPackage;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -63,10 +64,9 @@ public class FactornodeImpl extends NodeImpl implements Factornode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValues()
-	 * @generated
-	 * @ordered
+		 * @ordered
 	 */
-	protected static final double[][] VALUES_EDEFAULT = (double[][])GraphEditorFactory.eINSTANCE.createFromString(GraphEditorPackage.eINSTANCE.getTable(), "null");
+	protected static final double[][] VALUES_EDEFAULT = (double[][])GraphEditorFactory.eINSTANCE.createFromString(GraphEditorPackage.eINSTANCE.getTable(), "2x2!{[0.0, 0.5];[1.0, 0.5]}");
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' attribute.
@@ -221,7 +221,8 @@ public class FactornodeImpl extends NodeImpl implements Factornode {
 		result.append(" (type: ");
 		result.append(type);
 		result.append(", values: ");
-		result.append(values);
+		for(int i=0;i<values.length;i++)
+			result.append(Arrays.toString(values[i]));
 		result.append(')');
 		return result.toString();
 	}

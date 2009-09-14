@@ -5,5 +5,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/SuperCSV-1.52.jar" sourcepath="GraphEditor.diagramsrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/ktable_2.1.3.jar" sourcepath="GraphEditor.diagramsrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-collections-3.2.1.jar" sourcepath="GraphEditor.diagramsrc.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

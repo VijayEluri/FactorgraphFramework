@@ -176,7 +176,30 @@ public class Main {
 		SumProduct sum = new SumProduct(test);
 		sum.doSum();
 		test.print();
-
+		System.out.println("----------------------- max product");
+		MaxProduct max= new MaxProduct(test, v5);
+		/*	max.calcFactorToVariable(0);
+			max.calcFactorToVariable(1);
+			max.calcVariableToFactor(2);
+			max.calcVariableToFactor(3);
+			max.calcVariableToFactor(4);
+			max.calcVariableToFactor(5);
+			max.calcFactorToVariable(6);
+			max.calcFactorToVariable(7);
+			max.calcFactorToVariable(8);
+			max.calcVariableToFactor(9);
+			max.calcFactorToVariable(10);
+			max.calcFactorToVariable(11);
+			max.calcVariableToFactor(12);
+			max.calcVariableToFactor(12);
+			max.calcVariableToFactor(13);
+			max.calcVariableToFactor(14);
+			max.calcVariableToFactor(15);
+			max.calcFactorToVariable(16);
+			max.calcFactorToVariable(17); */
+			max.doMax();
+			System.out.println("");
+			//test.print();	
 	}
 
 }

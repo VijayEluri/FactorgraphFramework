@@ -68,6 +68,7 @@ public class GraphItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addResultPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,6 +87,28 @@ public class GraphItemProvider
 				 getString("_UI_Graph_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Graph_name_feature", "_UI_Graph_type"),
 				 GraphEditorPackage.Literals.GRAPH__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Result feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addResultPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Graph_result_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Graph_result_feature", "_UI_Graph_type"),
+				 GraphEditorPackage.Literals.GRAPH__RESULT,
 				 true,
 				 false,
 				 false,
@@ -164,6 +187,7 @@ public class GraphItemProvider
 
 		switch (notification.getFeatureID(Graph.class)) {
 			case GraphEditorPackage.GRAPH__NAME:
+			case GraphEditorPackage.GRAPH__RESULT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case GraphEditorPackage.GRAPH__NODES:

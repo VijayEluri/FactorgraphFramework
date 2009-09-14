@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <ul>
  *   <li>{@link graphEditor.impl.VariablenodeImpl#getType <em>Type</em>}</li>
  *   <li>{@link graphEditor.impl.VariablenodeImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link graphEditor.impl.VariablenodeImpl#isIsKnown <em>Is Known</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +68,26 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 	 * @ordered
 	 */
 	protected EList<Double> values;
+
+	/**
+	 * The default value of the '{@link #isIsKnown() <em>Is Known</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsKnown()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_KNOWN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsKnown() <em>Is Known</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsKnown()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isKnown = IS_KNOWN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,6 +146,27 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsKnown() {
+		return isKnown;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsKnown(boolean newIsKnown) {
+		boolean oldIsKnown = isKnown;
+		isKnown = newIsKnown;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphEditorPackage.VARIABLENODE__IS_KNOWN, oldIsKnown, isKnown));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -132,6 +174,8 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 				return getType();
 			case GraphEditorPackage.VARIABLENODE__VALUES:
 				return getValues();
+			case GraphEditorPackage.VARIABLENODE__IS_KNOWN:
+				return isIsKnown() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -152,6 +196,9 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 				getValues().clear();
 				getValues().addAll((Collection<? extends Double>)newValue);
 				return;
+			case GraphEditorPackage.VARIABLENODE__IS_KNOWN:
+				setIsKnown(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -170,6 +217,9 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 			case GraphEditorPackage.VARIABLENODE__VALUES:
 				getValues().clear();
 				return;
+			case GraphEditorPackage.VARIABLENODE__IS_KNOWN:
+				setIsKnown(IS_KNOWN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -186,6 +236,8 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 				return type != TYPE_EDEFAULT;
 			case GraphEditorPackage.VARIABLENODE__VALUES:
 				return values != null && !values.isEmpty();
+			case GraphEditorPackage.VARIABLENODE__IS_KNOWN:
+				return isKnown != IS_KNOWN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -204,6 +256,8 @@ public class VariablenodeImpl extends NodeImpl implements Variablenode {
 		result.append(type);
 		result.append(", values: ");
 		result.append(values);
+		result.append(", isKnown: ");
+		result.append(isKnown);
 		result.append(')');
 		return result.toString();
 	}

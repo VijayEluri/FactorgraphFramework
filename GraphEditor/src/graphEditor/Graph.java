@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link graphEditor.Graph#getNodes <em>Nodes</em>}</li>
  *   <li>{@link graphEditor.Graph#getEdges <em>Edges</em>}</li>
  *   <li>{@link graphEditor.Graph#getMessages <em>Messages</em>}</li>
+ *   <li>{@link graphEditor.Graph#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,6 +104,32 @@ public interface Graph extends EObject {
 	 * @generated
 	 */
 	EList<Message> getMessages();
+
+	/**
+	 * Returns the value of the '<em><b>Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Result</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Result</em>' attribute.
+	 * @see #setResult(double[][])
+	 * @see graphEditor.GraphEditorPackage#getGraph_Result()
+	 * @model dataType="graphEditor.Table"
+	 * @generated
+	 */
+	double[][] getResult();
+
+	/**
+	 * Sets the value of the '{@link graphEditor.Graph#getResult <em>Result</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' attribute.
+	 * @see #getResult()
+	 * @generated
+	 */
+	void setResult(double[][] value);
 
 	/**
 	 * <!-- begin-user-doc -->

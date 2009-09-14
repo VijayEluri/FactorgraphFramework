@@ -108,13 +108,22 @@ public interface GraphEditorPackage extends EPackage {
 	int GRAPH__MESSAGES = 3;
 
 	/**
+	 * The feature id for the '<em><b>Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__RESULT = 4;
+
+	/**
 	 * The number of structural features of the '<em>Graph</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAPH_FEATURE_COUNT = 4;
+	int GRAPH_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.impl.GraphElementImpl <em>Graph Element</em>}' class.
@@ -283,13 +292,22 @@ public interface GraphEditorPackage extends EPackage {
 	int VARIABLENODE__VALUES = NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Known</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLENODE__IS_KNOWN = NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Variablenode</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLENODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
+	int VARIABLENODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link graphEditor.impl.MessageImpl <em>Message</em>}' class.
@@ -497,6 +515,17 @@ public interface GraphEditorPackage extends EPackage {
 	EReference getGraph_Messages();
 
 	/**
+	 * Returns the meta object for the attribute '{@link graphEditor.Graph#getResult <em>Result</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Result</em>'.
+	 * @see graphEditor.Graph#getResult()
+	 * @see #getGraph()
+	 * @generated
+	 */
+	EAttribute getGraph_Result();
+
+	/**
 	 * Returns the meta object for class '{@link graphEditor.GraphElement <em>Graph Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -601,6 +630,17 @@ public interface GraphEditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getVariablenode_Values();
+
+	/**
+	 * Returns the meta object for the attribute '{@link graphEditor.Variablenode#isIsKnown <em>Is Known</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Known</em>'.
+	 * @see graphEditor.Variablenode#isIsKnown()
+	 * @see #getVariablenode()
+	 * @generated
+	 */
+	EAttribute getVariablenode_IsKnown();
 
 	/**
 	 * Returns the meta object for class '{@link graphEditor.Message <em>Message</em>}'.
@@ -793,6 +833,14 @@ public interface GraphEditorPackage extends EPackage {
 		EReference GRAPH__MESSAGES = eINSTANCE.getGraph_Messages();
 
 		/**
+		 * The meta object literal for the '<em><b>Result</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAPH__RESULT = eINSTANCE.getGraph_Result();
+
+		/**
 		 * The meta object literal for the '{@link graphEditor.impl.GraphElementImpl <em>Graph Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -879,6 +927,14 @@ public interface GraphEditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VARIABLENODE__VALUES = eINSTANCE.getVariablenode_Values();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Known</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLENODE__IS_KNOWN = eINSTANCE.getVariablenode_IsKnown();
 
 		/**
 		 * The meta object literal for the '{@link graphEditor.impl.MessageImpl <em>Message</em>}' class.

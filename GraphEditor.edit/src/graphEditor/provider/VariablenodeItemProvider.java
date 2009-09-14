@@ -63,6 +63,7 @@ public class VariablenodeItemProvider
 
 			addTypePropertyDescriptor(object);
 			addValuesPropertyDescriptor(object);
+			addIsKnownPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,6 +113,28 @@ public class VariablenodeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Is Known feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsKnownPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Variablenode_isKnown_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Variablenode_isKnown_feature", "_UI_Variablenode_type"),
+				 GraphEditorPackage.Literals.VARIABLENODE__IS_KNOWN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Variablenode.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,6 +173,7 @@ public class VariablenodeItemProvider
 		switch (notification.getFeatureID(Variablenode.class)) {
 			case GraphEditorPackage.VARIABLENODE__TYPE:
 			case GraphEditorPackage.VARIABLENODE__VALUES:
+			case GraphEditorPackage.VARIABLENODE__IS_KNOWN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

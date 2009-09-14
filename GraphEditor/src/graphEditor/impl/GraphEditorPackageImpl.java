@@ -232,6 +232,15 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGraph_Result() {
+		return (EAttribute)graphEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getGraphElement() {
 		return graphElementEClass;
 	}
@@ -315,6 +324,15 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 	 */
 	public EAttribute getVariablenode_Values() {
 		return (EAttribute)variablenodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVariablenode_IsKnown() {
+		return (EAttribute)variablenodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -458,6 +476,7 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 		createEReference(graphEClass, GRAPH__NODES);
 		createEReference(graphEClass, GRAPH__EDGES);
 		createEReference(graphEClass, GRAPH__MESSAGES);
+		createEAttribute(graphEClass, GRAPH__RESULT);
 
 		graphElementEClass = createEClass(GRAPH_ELEMENT);
 		createEAttribute(graphElementEClass, GRAPH_ELEMENT__ID);
@@ -472,6 +491,7 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 		variablenodeEClass = createEClass(VARIABLENODE);
 		createEAttribute(variablenodeEClass, VARIABLENODE__TYPE);
 		createEAttribute(variablenodeEClass, VARIABLENODE__VALUES);
+		createEAttribute(variablenodeEClass, VARIABLENODE__IS_KNOWN);
 
 		messageEClass = createEClass(MESSAGE);
 		createEAttribute(messageEClass, MESSAGE__COUNT);
@@ -532,6 +552,7 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 		initEReference(getGraph_Nodes(), this.getNode(), null, "nodes", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGraph_Edges(), this.getEdge(), null, "edges", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGraph_Messages(), this.getMessage(), null, "messages", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGraph_Result(), this.getTable(), "result", null, 0, 1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(graphEClass, this.getGraphElement(), "getGraphElement", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "id", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -547,11 +568,12 @@ public class GraphEditorPackageImpl extends EPackageImpl implements GraphEditorP
 
 		initEClass(factornodeEClass, Factornode.class, "Factornode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFactornode_Type(), this.getFunctionType(), "type", null, 1, 1, Factornode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFactornode_Values(), this.getTable(), "values", "null", 0, 1, Factornode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFactornode_Values(), this.getTable(), "values", "null", 1, 1, Factornode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variablenodeEClass, Variablenode.class, "Variablenode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariablenode_Type(), this.getVariableType(), "type", null, 1, 1, Variablenode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariablenode_Values(), ecorePackage.getEDouble(), "values", "0", 2, 2, Variablenode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVariablenode_IsKnown(), ecorePackage.getEBoolean(), "isKnown", "false", 1, 1, Variablenode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMessage_Count(), ecorePackage.getEInt(), "count", null, 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

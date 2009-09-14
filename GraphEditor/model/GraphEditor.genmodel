@@ -25,6 +25,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Graph/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Graph/edges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GraphEditor.ecore#//Graph/messages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Graph/result"/>
       <genOperations ecoreOperation="GraphEditor.ecore#//Graph/getGraphElement">
         <genParameters ecoreParameter="GraphEditor.ecore#//Graph/getGraphElement/id"/>
       </genOperations>
@@ -45,6 +46,7 @@
     <genClasses ecoreClass="GraphEditor.ecore#//Variablenode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Variablenode/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Variablenode/values"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Variablenode/isKnown"/>
     </genClasses>
     <genClasses ecoreClass="GraphEditor.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphEditor.ecore#//Message/count"/>

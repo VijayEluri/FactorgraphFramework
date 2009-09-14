@@ -5,11 +5,13 @@ Bundle-SymbolicName: GraphEditor.diagram; singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  lib/SuperCSV-1.52.jar,
- lib/ktable_2.1.3.jar
+ lib/ktable_2.1.3.jar,
+ lib/commons-collections-3.2.1.jar
 Bundle-Activator: graphEditor.diagram.part.GraphEditorDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: graphEditor.diagram.edit.parts,
+Export-Package: de.lmu.genzentrum.tresch,
+ graphEditor.diagram.edit.parts,
  graphEditor.diagram.part,
  graphEditor.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,

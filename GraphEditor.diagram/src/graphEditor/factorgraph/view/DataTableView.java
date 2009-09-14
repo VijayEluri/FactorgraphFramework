@@ -24,6 +24,7 @@ import org.eclipse.emf.transaction.RollbackException;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalCommandStack;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.swt.graphics.Cursor;
@@ -86,12 +87,15 @@ public class DataTableView extends ViewPart implements ISelectionListener {
 		loadFileAction.setEnabled(false);
 		initTableAction.setEnabled(false);
 
+		//TODO hier muﬂ noch der graph mit seinen resultsets rein!!!!
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 			if (structuredSelection.size() == 1
 					&& structuredSelection.getFirstElement() instanceof graphEditor.diagram.edit.parts.VariablenodeEditPart) {
 				mySelectedElement = (graphEditor.diagram.edit.parts.VariablenodeEditPart) structuredSelection
 						.getFirstElement();
+				loadFileAction.setEnabled(true);
+				initTableAction.setEnabled(true);
 				domain = mySelectedElement.getEditingDomain();
 				node = (Variablenode) mySelectedElement
 						.resolveSemanticElement();
@@ -114,8 +118,8 @@ public class DataTableView extends ViewPart implements ISelectionListener {
 			} else if (structuredSelection.size() == 1
 					&& structuredSelection.getFirstElement() instanceof graphEditor.diagram.edit.parts.FactornodeEditPart) {
 				mySelectedElement = (graphEditor.diagram.edit.parts.FactornodeEditPart) structuredSelection
-						.getFirstElement();
-				domain = mySelectedElement.getEditingDomain();
+				.getFirstElement();
+		domain = mySelectedElement.getEditingDomain();
 				node = (Factornode) mySelectedElement.resolveSemanticElement();
 				if (((Factornode) node).getType() == FunctionType.BOOLEAN) {
 					List<Variablenode> nodelist = null;
@@ -161,7 +165,54 @@ public class DataTableView extends ViewPart implements ISelectionListener {
 					table.update();
 
 				}
-			}else{
+			}else if (structuredSelection.size() == 1
+					&& structuredSelection.getFirstElement() instanceof graphEditor.diagram.edit.parts.GraphEditPart) {
+				DiagramEditPart mySelectedElement = (graphEditor.diagram.edit.parts.GraphEditPart) structuredSelection.getFirstElement();
+				loadFileAction.setEnabled(false);
+				initTableAction.setEnabled(false);
+				domain = mySelectedElement.getEditingDomain();
+				try {
+					
+				
+					final Resource r = domain.getResourceSet()
+							.getResources().get(0);
+					Graph graph = (Graph) domain
+							.runExclusive(new RunnableWithResult.Impl() {
+								public void run() {
+									Graph graph = (Graph) r.getContents()
+											.get(0);
+									setResult(graph);
+								}
+							});
+					data=graph.getResult();
+					
+					if( data != null){
+						List<Node> nodes=graph.getNodes();
+						List<Variablenode> vnodes=new ArrayList<Variablenode>();
+
+						for(int i=0;i<nodes.size();i++){
+							if(nodes.get(i) instanceof Variablenode){
+								vnodes.add((Variablenode)(nodes.get(i)));
+							}
+						}	
+						header=new String[vnodes.size()];
+						for(int i=0;i<vnodes.size();i++){
+							header[i]=vnodes.get(i).getName();
+						}
+						data=new double[][] {};
+						nodeid=-1L;
+						table.setModel(new TableModel(header, data, nodeid, null));
+					} else{
+						header=new String[]{"Graph has no calculated results"};
+						data=new double[][] {};
+						nodeid=-1L;
+						table.setModel(new TableModel(header, data, nodeid, null));
+					}
+				}
+				catch (InterruptedException e) {
+				}
+			}
+			else{
 				header=new String[]{"selection not supported"};
 				data=new double[][] {};
 				nodeid=-1L;
@@ -196,6 +247,8 @@ public class DataTableView extends ViewPart implements ISelectionListener {
 	}
 
 	private void makeActions() {
+		
+		//TODO hier muﬂ eine undo/redo command erzeugt werden!!!
 		loadFileAction = new Action() {
 			public void run() {
 				if (nodeid != -1L) {

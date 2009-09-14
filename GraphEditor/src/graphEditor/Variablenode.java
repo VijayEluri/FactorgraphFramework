@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link graphEditor.Variablenode#getType <em>Type</em>}</li>
  *   <li>{@link graphEditor.Variablenode#getValues <em>Values</em>}</li>
+ *   <li>{@link graphEditor.Variablenode#isIsKnown <em>Is Known</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,5 +71,32 @@ public interface Variablenode extends Node {
 	 * @generated
 	 */
 	EList<Double> getValues();
+
+	/**
+	 * Returns the value of the '<em><b>Is Known</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Known</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Known</em>' attribute.
+	 * @see #setIsKnown(boolean)
+	 * @see graphEditor.GraphEditorPackage#getVariablenode_IsKnown()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsKnown();
+
+	/**
+	 * Sets the value of the '{@link graphEditor.Variablenode#isIsKnown <em>Is Known</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Known</em>' attribute.
+	 * @see #isIsKnown()
+	 * @generated
+	 */
+	void setIsKnown(boolean value);
 
 } // Variablenode

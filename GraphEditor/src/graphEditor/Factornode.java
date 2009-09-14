@@ -67,7 +67,7 @@ public interface Factornode extends Node {
 	 * @return the value of the '<em>Values</em>' attribute.
 	 * @see #setValues(double[][])
 	 * @see graphEditor.GraphEditorPackage#getFactornode_Values()
-	 * @model default="null" dataType="graphEditor.Table"
+	 * @model default="null" dataType="graphEditor.Table" required="true"
 	 * @generated
 	 */
 	double[][] getValues();

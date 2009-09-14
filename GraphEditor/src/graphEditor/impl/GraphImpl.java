@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link graphEditor.impl.GraphImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link graphEditor.impl.GraphImpl#getEdges <em>Edges</em>}</li>
  *   <li>{@link graphEditor.impl.GraphImpl#getMessages <em>Messages</em>}</li>
+ *   <li>{@link graphEditor.impl.GraphImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +102,26 @@ public class GraphImpl extends EObjectImpl implements Graph {
 	 * @ordered
 	 */
 	protected EList<Message> messages;
+
+	/**
+	 * The default value of the '{@link #getResult() <em>Result</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double[][] RESULT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResult()
+	 * @generated
+	 * @ordered
+	 */
+	protected double[][] result = RESULT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,6 +205,27 @@ public class GraphImpl extends EObjectImpl implements Graph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double[][] getResult() {
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResult(double[][] newResult) {
+		double[][] oldResult = result;
+		result = newResult;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphEditorPackage.GRAPH__RESULT, oldResult, result));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	public GraphElement getGraphElement(long id) {
 		if (nodes == null) {
@@ -212,16 +254,16 @@ public class GraphImpl extends EObjectImpl implements Graph {
 	 * <!-- end-user-doc -->
 
 	 */
-	public EList<Variablenode> getConnectingVariablenodes(Factornode node) {
+	public EList<Variablenode> getConnectingVariablenodes(Factornode fnode) {
 		EList<Variablenode> list=new UniqueEList<Variablenode>();
 		if (edges == null) {
 			edges = new EObjectContainmentEList<Edge>(Edge.class, this, GraphEditorPackage.GRAPH__EDGES);
 		}
 		for (Edge e: edges){
-			if(e.getFrom() == node)
+			if(e.getFrom() == fnode)
 				if (e.getTo() instanceof Variablenode)
 					list.add((Variablenode)e.getTo());
-			if(e.getTo() == node)
+			if(e.getTo() == fnode)
 				if (e.getFrom() instanceof Variablenode)
 					list.add((Variablenode)e.getFrom());
 		}
@@ -262,6 +304,8 @@ public class GraphImpl extends EObjectImpl implements Graph {
 				return getEdges();
 			case GraphEditorPackage.GRAPH__MESSAGES:
 				return getMessages();
+			case GraphEditorPackage.GRAPH__RESULT:
+				return getResult();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -290,6 +334,9 @@ public class GraphImpl extends EObjectImpl implements Graph {
 				getMessages().clear();
 				getMessages().addAll((Collection<? extends Message>)newValue);
 				return;
+			case GraphEditorPackage.GRAPH__RESULT:
+				setResult((double[][])newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -314,6 +361,9 @@ public class GraphImpl extends EObjectImpl implements Graph {
 			case GraphEditorPackage.GRAPH__MESSAGES:
 				getMessages().clear();
 				return;
+			case GraphEditorPackage.GRAPH__RESULT:
+				setResult(RESULT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +384,8 @@ public class GraphImpl extends EObjectImpl implements Graph {
 				return edges != null && !edges.isEmpty();
 			case GraphEditorPackage.GRAPH__MESSAGES:
 				return messages != null && !messages.isEmpty();
+			case GraphEditorPackage.GRAPH__RESULT:
+				return RESULT_EDEFAULT == null ? result != null : !RESULT_EDEFAULT.equals(result);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -350,6 +402,8 @@ public class GraphImpl extends EObjectImpl implements Graph {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", result: ");
+		result.append(result);
 		result.append(')');
 		return result.toString();
 	}

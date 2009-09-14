@@ -252,8 +252,4 @@ public class TableModel extends KTableDefaultModel {
 	public double[][] getData() {
 		return data;
 	}
-
-	private void saveData(long nodeid) {
-
-	}
 }
